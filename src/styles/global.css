@@ -2,7 +2,7 @@
    thoughts — Design System
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* --- Reset --- */
 *,
@@ -31,6 +31,7 @@
   --color-separator: rgba(255, 255, 255, 0.04);
 
   --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -197,6 +198,7 @@ main {
 
 /* --- Prose --- */
 .prose {
+  font-family: var(--font-sans);
   line-height: 1.8;
   color: var(--color-text);
 }
@@ -289,7 +291,7 @@ main {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   margin: 1.5em 0;
   box-shadow: var(--shadow-sm);
   position: relative;
