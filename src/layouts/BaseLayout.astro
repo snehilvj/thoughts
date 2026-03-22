@@ -1,7 +1,6 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import StickFigure from '../components/StickFigure.astro';
 import { SITE } from '../config';
 import '../styles/global.css';
 
@@ -76,6 +75,5 @@ const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, 
       <slot />
     </main>
     <Footer />
-    <StickFigure />
   </body>
 </html>
