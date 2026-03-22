@@ -14,6 +14,7 @@ const blog = defineCollection({
     heroAlt: z.string().optional(),
     sources: z.array(z.object({
       title: z.string(),
+      description: z.string().optional(),
       url: z.string().url(),
     })).optional(),
   }),
