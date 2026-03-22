@@ -2,27 +2,156 @@
 ---
 
 <div class="flying-creatures" aria-hidden="true">
-  <!-- Bird silhouettes (light mode) -->
-  <svg class="creature bird bird--1" viewBox="0 0 20 8" fill="none">
-    <path d="M0 8 Q5 0 10 4 Q15 0 20 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  </svg>
-  <svg class="creature bird bird--2" viewBox="0 0 20 8" fill="none">
-    <path d="M0 8 Q5 0 10 4 Q15 0 20 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  </svg>
-  <svg class="creature bird bird--3" viewBox="0 0 20 8" fill="none">
-    <path d="M0 8 Q5 0 10 4 Q15 0 20 8" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  </svg>
+  <!-- Canvas background -->
+  <div class="canvas-bg"></div>
 
-  <!-- Bat silhouettes (dark mode) -->
-  <svg class="creature bat bat--1" viewBox="0 0 24 10" fill="none">
-    <path d="M0 2 Q3 0 6 3 Q8 1 12 5 Q16 1 18 3 Q21 0 24 2 L20 6 Q16 4 12 7 Q8 4 4 6 Z" fill="currentColor"/>
-  </svg>
-  <svg class="creature bat bat--2" viewBox="0 0 24 10" fill="none">
-    <path d="M0 2 Q3 0 6 3 Q8 1 12 5 Q16 1 18 3 Q21 0 24 2 L20 6 Q16 4 12 7 Q8 4 4 6 Z" fill="currentColor"/>
-  </svg>
-  <svg class="creature bat bat--3" viewBox="0 0 24 10" fill="none">
-    <path d="M0 2 Q3 0 6 3 Q8 1 12 5 Q16 1 18 3 Q21 0 24 2 L20 6 Q16 4 12 7 Q8 4 4 6 Z" fill="currentColor"/>
-  </svg>
+  <!-- Flock 1: 4 birds/bats, left-to-right -->
+  <div class="flock flock--1">
+    <div class="flock-bob">
+      <svg class="creature bird" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:20px;--oy:-16px;--fd:0.08s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:-18px;--oy:-14px;--fd:0.12s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:8px;--oy:14px;--fd:0.05s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+
+      <svg class="creature bat" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:22px;--oy:-14px;--fd:0.06s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:-16px;--oy:-12px;--fd:0.1s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:10px;--oy:12px;--fd:0.04s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Flock 2: 3 birds/bats, right-to-left -->
+  <div class="flock flock--2">
+    <div class="flock-bob">
+      <svg class="creature bird" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:-22px;--oy:-10px;--fd:0.1s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:16px;--oy:-18px;--fd:0.06s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+
+      <svg class="creature bat" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:-20px;--oy:-10px;--fd:0.08s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:18px;--oy:-16px;--fd:0.05s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Flock 3: 5 birds/bats, left-to-right, lower -->
+  <div class="flock flock--3">
+    <div class="flock-bob">
+      <svg class="creature bird" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:24px;--oy:-12px;--fd:0.07s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:-20px;--oy:-10px;--fd:0.13s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:10px;--oy:16px;--fd:0.03s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:-12px;--oy:12px;--fd:0.09s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+
+      <svg class="creature bat" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:22px;--oy:-12px;--fd:0.06s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:-18px;--oy:-10px;--fd:0.11s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:12px;--oy:14px;--fd:0.04s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:-10px;--oy:10px;--fd:0.08s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Flock 4: 3 birds/bats, right-to-left, high -->
+  <div class="flock flock--4">
+    <div class="flock-bob">
+      <svg class="creature bird" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:18px;--oy:14px;--fd:0.09s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+      <svg class="creature bird" style="--ox:-14px;--oy:10px;--fd:0.05s" viewBox="0 0 24 12" fill="none">
+        <g class="wing wing--left"><path d="M12 6 Q6 0 0 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+        <g class="wing wing--right"><path d="M12 6 Q18 0 24 10" stroke="currentColor" stroke-width="1.8" fill="none"/></g>
+      </svg>
+
+      <svg class="creature bat" style="--ox:0px;--oy:0px;--fd:0s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:16px;--oy:12px;--fd:0.07s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+      <svg class="creature bat" style="--ox:-14px;--oy:10px;--fd:0.04s" viewBox="0 0 28 14" fill="none">
+        <g class="wing wing--left"><path d="M14 7 Q10 2 7 4 Q4 0 0 3 L4 8 Q7 6 10 9 Z" fill="currentColor"/></g>
+        <g class="wing wing--right"><path d="M14 7 Q18 2 21 4 Q24 0 28 3 L24 8 Q21 6 18 9 Z" fill="currentColor"/></g>
+      </svg>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -34,82 +163,135 @@
     overflow: hidden;
   }
 
-  .creature {
+  /* --- Canvas background --- */
+  .canvas-bg {
     position: absolute;
-    color: var(--color-text-muted);
-    opacity: 0;
+    inset: 0;
+    background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 40%, #E0F0FF 100%);
+    transition: background var(--transition-slow, 300ms ease-out);
+  }
+
+  :global(:root:not([data-theme='light'])) .canvas-bg {
+    background: linear-gradient(180deg, #0a0e1a 0%, #111827 40%, #1a1a2e 100%);
   }
 
   /* --- Theme visibility --- */
   .bird { display: block; }
   .bat { display: none; }
-
   :global(:root:not([data-theme='light'])) .bird { display: none; }
   :global(:root:not([data-theme='light'])) .bat { display: block; }
 
-  /* --- Bird sizes & positions --- */
-  .bird--1 { width: 18px; top: 12%; }
-  .bird--2 { width: 14px; top: 18%; }
-  .bird--3 { width: 16px; top: 8%; }
-
-  .bat--1 { width: 20px; top: 10%; }
-  .bat--2 { width: 16px; top: 16%; }
-  .bat--3 { width: 18px; top: 6%; }
-
-  /* --- Flight animations --- */
-  .bird--1, .bat--1 {
-    animation: fly-across-1 80s linear 10s infinite;
-  }
-  .bird--2, .bat--2 {
-    animation: fly-across-2 95s linear 40s infinite;
-  }
-  .bird--3, .bat--3 {
-    animation: fly-across-3 70s linear 65s infinite;
+  /* --- Creature base --- */
+  .creature {
+    position: absolute;
+    color: var(--color-text-muted);
+    opacity: 0;
+    width: 44px;
+    translate: var(--ox, 0px) var(--oy, 0px);
   }
 
-  /*
-   * Each keyframe keeps the creature off-screen for most of the cycle.
-   * The visible flight is ~12-15% of the total duration.
-   */
-  @keyframes fly-across-1 {
-    0%, 5% { transform: translate(-30px, 0); opacity: 0; }
-    6% { opacity: 0.2; }
-    8% { transform: translate(15vw, -8px); }
-    11% { transform: translate(40vw, 4px); }
-    14% { transform: translate(65vw, -6px); }
-    17% { transform: translate(90vw, 2px); }
-    18% { transform: translate(105vw, -3px); opacity: 0.2; }
-    19% { opacity: 0; }
-    19.1%, 100% { transform: translate(110vw, 0); opacity: 0; }
+  .bird { color: #3a3a3a; }
+  :global(:root:not([data-theme='light'])) .bat { color: #c0c0c0; }
+
+  /* --- Wing flapping --- */
+  .wing {
+    transform-origin: 50% 100%;
+    animation: flap 0.35s ease-in-out infinite alternate;
+    animation-delay: var(--fd, 0s);
   }
 
-  @keyframes fly-across-2 {
-    0%, 3% { transform: translate(calc(100vw + 30px), 0); opacity: 0; }
-    4% { opacity: 0.18; }
-    6% { transform: translate(80vw, -6px); }
-    9% { transform: translate(55vw, 5px); }
-    12% { transform: translate(30vw, -4px); }
-    15% { transform: translate(5vw, 3px); }
-    16% { transform: translate(-30px, -2px); opacity: 0.18; }
-    17% { opacity: 0; }
-    17.1%, 100% { transform: translate(-40px, 0); opacity: 0; }
+  .wing--left { transform-origin: 100% 100%; }
+  .wing--right { transform-origin: 0% 100%; }
+
+  @keyframes flap {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(0.25); }
   }
 
-  @keyframes fly-across-3 {
-    0%, 8% { transform: translate(-30px, 0); opacity: 0; }
-    9% { opacity: 0.15; }
-    11% { transform: translate(20vw, 6px); }
-    14% { transform: translate(50vw, -5px); }
-    17% { transform: translate(75vw, 3px); }
-    19% { transform: translate(105vw, -2px); opacity: 0.15; }
-    20% { opacity: 0; }
-    20.1%, 100% { transform: translate(110vw, 0); opacity: 0; }
+  /* Bats flap faster */
+  .bat .wing {
+    animation-duration: 0.25s;
+  }
+
+  /* --- Flock positioning & flight --- */
+  .flock {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .flock--1 { top: 18%; }
+  .flock--2 { top: 38%; }
+  .flock--3 { top: 58%; }
+  .flock--4 { top: 12%; }
+
+  .flock--1 .creature { width: 44px; }
+  .flock--2 .creature { width: 38px; }
+  .flock--3 .creature { width: 48px; }
+  .flock--4 .creature { width: 36px; }
+
+  /* --- Vertical bobbing (on inner wrapper) --- */
+  .flock-bob {
+    position: relative;
+    animation: bob 3s ease-in-out infinite;
+  }
+
+  .flock--2 .flock-bob { animation-duration: 3.5s; }
+  .flock--3 .flock-bob { animation-duration: 2.8s; }
+  .flock--4 .flock-bob { animation-duration: 3.2s; }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  /* --- Flight paths --- */
+  .flock--1 {
+    animation: fly-right 28s linear 2s infinite;
+  }
+  .flock--2 {
+    animation: fly-left 32s linear 10s infinite;
+  }
+  .flock--3 {
+    animation: fly-right 25s linear 18s infinite;
+  }
+  .flock--4 {
+    animation: fly-left 35s linear 6s infinite;
+  }
+
+  @keyframes fly-right {
+    0%, 2% { transform: translateX(-80px); opacity: 0; }
+    4% { opacity: 0.5; }
+    6% { transform: translateX(5vw); }
+    15% { transform: translateX(25vw); }
+    25% { transform: translateX(45vw); }
+    35% { transform: translateX(65vw); }
+    40% { transform: translateX(80vw); }
+    43% { transform: translateX(95vw); opacity: 0.5; }
+    45% { transform: translateX(110vw); opacity: 0; }
+    45.1%, 100% { transform: translateX(110vw); opacity: 0; }
+  }
+
+  @keyframes fly-left {
+    0%, 2% { transform: translateX(calc(100vw + 80px)); opacity: 0; }
+    4% { opacity: 0.45; }
+    6% { transform: translateX(90vw); }
+    15% { transform: translateX(70vw); }
+    25% { transform: translateX(50vw); }
+    35% { transform: translateX(30vw); }
+    40% { transform: translateX(15vw); }
+    43% { transform: translateX(-40px); opacity: 0.45; }
+    45% { transform: translateX(-100px); opacity: 0; }
+    45.1%, 100% { transform: translateX(-100px); opacity: 0; }
   }
 
   /* --- Reduced motion --- */
   @media (prefers-reduced-motion: reduce) {
-    .creature {
+    .flock,
+    .flock-bob,
+    .wing {
       animation: none !important;
+    }
+    .flock {
       display: none !important;
     }
   }

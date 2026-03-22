@@ -70,12 +70,15 @@ const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, 
     </script>
   </head>
   <body>
-    <a href="#main-content" class="sr-only">Skip to content</a>
-    <Header />
-    <main id="main-content">
-      <slot />
-    </main>
-    <Footer />
     <FlyingCreatures />
+    <div class="content-curtain">
+      <a href="#main-content" class="sr-only">Skip to content</a>
+      <Header />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <div class="canvas-reveal-spacer" aria-hidden="true"></div>
   </body>
 </html>
