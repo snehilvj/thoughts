@@ -163,16 +163,12 @@
     overflow: hidden;
   }
 
-  /* --- Canvas background --- */
+  /* --- Canvas background: match site theme --- */
   .canvas-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 40%, #E0F0FF 100%);
-    transition: background var(--transition-slow, 300ms ease-out);
-  }
-
-  :global(:root:not([data-theme='light'])) .canvas-bg {
-    background: linear-gradient(180deg, #0a0e1a 0%, #111827 40%, #1a1a2e 100%);
+    background-color: var(--color-bg);
+    transition: background-color var(--transition-base, 200ms ease-out);
   }
 
   /* --- Theme visibility --- */
@@ -185,7 +181,6 @@
   .creature {
     position: absolute;
     color: var(--color-text-muted);
-    opacity: 0;
     width: 44px;
     translate: var(--ox, 0px) var(--oy, 0px);
   }
