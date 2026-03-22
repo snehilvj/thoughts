@@ -90,13 +90,20 @@ body {
   font-family: var(--font-sans);
   color: var(--color-text);
   background-color: var(--color-bg);
-  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-attachment: fixed;
   line-height: 1.75;
   letter-spacing: 0.01em;
   transition: color var(--transition-base), background-color var(--transition-base);
   min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
 }
 
 /* --- Typography --- */
