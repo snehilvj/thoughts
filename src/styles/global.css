@@ -297,7 +297,7 @@ main {
 
 .prose pre {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   line-height: 1.6;
   background: var(--color-code-bg) !important;
   border: 1px solid var(--color-border-strong);
@@ -353,7 +353,7 @@ main {
   content: '·   ·   ·';
   color: var(--color-text-muted);
   letter-spacing: 0.2em;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
 .prose table {
