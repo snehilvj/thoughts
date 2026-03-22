@@ -63,6 +63,22 @@ const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, 
         document.documentElement.dataset.theme = stored || 'dark';
       })();
     </script>
+
+    <!-- Garden visit counter (tracks visits across all pages) -->
+    <script is:inline>
+      (function () {
+        var key = 'thoughts-garden';
+        var now = Date.now();
+        try {
+          var raw = localStorage.getItem(key);
+          var data = raw ? JSON.parse(raw) : { visits: 0, firstVisit: now, lastVisit: 0 };
+          data.visits++;
+          data.lastVisit = now;
+          if (!data.firstVisit) data.firstVisit = now;
+          localStorage.setItem(key, JSON.stringify(data));
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <a href="#main-content" class="sr-only">Skip to content</a>
