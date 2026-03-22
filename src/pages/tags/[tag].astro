@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getSortedPosts, getAllTags } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  const tags = await getAllTags();
+
+  return Array.from(tags.keys()).map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((post) => post.data.tags.includes(tag)),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`Posts tagged "${tag}"`} description={`All posts tagged with "${tag}".`}>
+  <div class="tag-page container">
+    <h1 class="tag-page__title">
+      <span class="tag-page__label">Tagged</span>
+      {tag}
+    </h1>
+    <p class="tag-page__count">{posts.length} post{posts.length !== 1 ? 's' : ''}</p>
+
+    <div class="tag-page__posts">
+      {posts.map((post: any) => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+          slug={post.id}
+          body={post.body || ''}
+        />
+      ))}
+    </div>
+
+    <a href="/tags" class="tag-page__back">&larr; All tags</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page {
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .tag-page__title {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .tag-page__label {
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-right: 0.3em;
+  }
+
+  .tag-page__count {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .tag-page__back {
+    display: inline-block;
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent);
+  }
+</style>

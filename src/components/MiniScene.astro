@@ -1,0 +1,64 @@
+---
+---
+
+<canvas class="mini-scene" id="mini-scene" width="32" height="32"></canvas>
+
+<script>
+  import * as THREE from 'three';
+
+  const canvas = document.getElementById('mini-scene') as HTMLCanvasElement;
+
+  if (canvas) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.z = 3;
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+    });
+    renderer.setSize(32, 32);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const geometry = new THREE.IcosahedronGeometry(0.8, 2);
+    const material = new THREE.MeshBasicMaterial({
+      color: new THREE.Color('#818cf8'),
+      wireframe: true,
+      transparent: true,
+      opacity: 0.5,
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const time = performance.now() * 0.001;
+      mesh.rotation.y = time * 0.3;
+      mesh.rotation.x = Math.sin(time * 0.2) * 0.2;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Theme-aware
+    const observer = new MutationObserver(() => {
+      const isLight = document.documentElement.dataset.theme === 'light';
+      material.color.set(isLight ? '#6366f1' : '#818cf8');
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+  }
+</script>
+
+<style>
+  .mini-scene {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
+</style>

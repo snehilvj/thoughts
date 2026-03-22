@@ -1,0 +1,83 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import TagList from './TagList.astro';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+  slug: string;
+  body: string;
+}
+
+const { title, description, pubDate, tags, slug, body } = Astro.props;
+const readingTime = getReadingTime(body);
+---
+
+<article class="post-card fade-in-up" data-tags={tags.join(',')}>
+  <a href={`/blog/${slug}`} class="post-card__link">
+    <div class="post-card__meta">
+      <FormattedDate date={pubDate} />
+      <span class="post-card__sep">&middot;</span>
+      <span>{readingTime}</span>
+    </div>
+    <h3 class="post-card__title">{title}</h3>
+    <p class="post-card__desc">{description}</p>
+  </a>
+  {tags.length > 0 && <TagList tags={tags} />}
+</article>
+
+<style>
+  .post-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    transition: transform var(--transition-fast);
+  }
+
+  .post-card:last-child {
+    border-bottom: none;
+  }
+
+  .post-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-card__link:hover .post-card__title {
+    color: var(--color-accent);
+  }
+
+  .post-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .post-card__sep {
+    color: var(--color-border);
+  }
+
+  .post-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+    transition: color var(--transition-fast);
+    line-height: 1.3;
+  }
+
+  .post-card__desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+</style>
