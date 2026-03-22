@@ -89,14 +89,23 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background-color: transparent;
   line-height: 1.75;
   letter-spacing: 0.01em;
-  transition: color var(--transition-base), background-color var(--transition-base);
+  transition: color var(--transition-base);
   min-height: 100vh;
 }
 
-body::before {
+/* Content curtain - opaque layer that covers the fixed animation canvas */
+.content-curtain {
+  position: relative;
+  z-index: 2;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  transition: background-color var(--transition-base);
+}
+
+.content-curtain::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -104,6 +113,11 @@ body::before {
   background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
   background-size: 24px 24px;
   pointer-events: none;
+}
+
+/* Spacer that reveals the animation canvas when scrolled to */
+.canvas-reveal-spacer {
+  height: 100vh;
 }
 
 /* --- Typography --- */
