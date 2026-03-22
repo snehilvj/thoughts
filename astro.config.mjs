@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://snehilvj.dev',
+  site: 'https://snehilvj.github.io',
+  base: '/thoughts',
   integrations: [sitemap()],
   markdown: {
     shikiConfig: {

@@ -40,7 +40,7 @@ const { tag, posts } = Astro.props;
       ))}
     </div>
 
-    <a href="/tags" class="tag-page__back">&larr; All tags</a>
+    <a href={`${import.meta.env.BASE_URL}tags`} class="tag-page__back">&larr; All tags</a>
   </div>
 </BaseLayout>
 

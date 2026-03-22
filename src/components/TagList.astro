@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { tags, linked = true } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const tagCategories: Record<string, string> = {
   tech: 'tech', webdev: 'tech', astro: 'tech', javascript: 'tech', typescript: 'tech', python: 'tech',
@@ -21,7 +22,7 @@ function getCategory(tag: string): string {
 <div class="tag-list">
   {tags.map((tag) =>
     linked ? (
-      <a href={`/tags/${tag}`} class="tag" data-category={getCategory(tag)}>
+      <a href={`${base}tags/${tag}`} class="tag" data-category={getCategory(tag)}>
         {tag}
       </a>
     ) : (

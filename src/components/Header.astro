@@ -3,18 +3,19 @@ import ThemeToggle from './ThemeToggle.astro';
 import { SITE } from '../config';
 
 const pathname = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="header">
   <nav class="header__nav container container--wide">
-    <a href="/" class="header__logo">
+    <a href={base} class="header__logo">
       <span class="header__logo-text">{SITE.title}</span>
     </a>
 
     <div class="header__links">
-      <a href="/" class:list={['header__link', { active: pathname === '/' }]}>Home</a>
-      <a href="/blog" class:list={['header__link', { active: pathname.startsWith('/blog') }]}>Blog</a>
-      <a href="/about" class:list={['header__link', { active: pathname === '/about/' || pathname === '/about' }]}>About</a>
+      <a href={base} class:list={['header__link', { active: pathname === base || pathname === base.slice(0, -1) }]}>Home</a>
+      <a href={`${base}blog`} class:list={['header__link', { active: pathname.startsWith(`${base}blog`) }]}>Blog</a>
+      <a href={`${base}about`} class:list={['header__link', { active: pathname.startsWith(`${base}about`) }]}>About</a>
     </div>
 
     <div class="header__actions">

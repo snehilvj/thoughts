@@ -30,7 +30,7 @@ import { SITE } from '../config';
       <h2>Connect</h2>
       <p>
         Find me on <a href={SITE.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>,
-        or subscribe to the <a href="/rss.xml">RSS feed</a> to stay updated.
+        or subscribe to the <a href={`${import.meta.env.BASE_URL}rss.xml`}>RSS feed</a> to stay updated.
       </p>
     </div>
   </div>

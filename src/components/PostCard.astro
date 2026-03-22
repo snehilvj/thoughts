@@ -14,10 +14,11 @@ interface Props {
 
 const { title, description, pubDate, tags, slug, body } = Astro.props;
 const readingTime = getReadingTime(body);
+const base = import.meta.env.BASE_URL;
 ---
 
 <article class="post-card fade-in-up" data-tags={tags.join(',')}>
-  <a href={`/blog/${slug}`} class="post-card__link">
+  <a href={`${base}blog/${slug}`} class="post-card__link">
     <div class="post-card__meta">
       <FormattedDate date={pubDate} />
       <span class="post-card__sep">&middot;</span>

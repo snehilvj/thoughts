@@ -37,7 +37,8 @@
 
   async function loadIndex() {
     if (searchIndex) return searchIndex;
-    const res = await fetch('/search.json');
+    const base = import.meta.env.BASE_URL;
+    const res = await fetch(`${base}search.json`);
     searchIndex = await res.json();
     return searchIndex;
   }
@@ -77,7 +78,7 @@
     results.innerHTML = matches
       .map(
         (item) => `
-        <a href="/blog/${item.slug}" class="search-dialog__result">
+        <a href="${import.meta.env.BASE_URL}blog/${item.slug}" class="search-dialog__result">
           <span class="search-dialog__result-title">${item.title}</span>
           <span class="search-dialog__result-desc">${item.description}</span>
         </a>
