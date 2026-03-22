@@ -465,7 +465,4 @@ pre.mermaid svg {
     padding: 0 var(--space-4);
   }
 
-  body {
-    background-attachment: scroll;
-  }
 }
