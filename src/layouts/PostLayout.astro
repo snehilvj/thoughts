@@ -8,6 +8,7 @@ import { SITE } from '../config';
 
 interface Source {
   title: string;
+  description?: string;
   url: string;
 }
 
@@ -95,7 +96,7 @@ const dateStr = pubDate.toISOString().split('T')[0];
   <script>
     function extractDominantColor(img: HTMLImageElement) {
       const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
       if (!ctx) return;
 
       const size = 64;
@@ -121,14 +122,24 @@ const dateStr = pubDate.toISOString().split('T')[0];
         g = Math.round(g / count);
         b = Math.round(b / count);
 
-        img.style.setProperty('--spill-color', `rgba(${r}, ${g}, ${b}, 0.25)`);
+        // Boost saturation slightly so the spill feels vibrant
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        if (max - min < 30) {
+          // Near-grayscale image — use a warm neutral spill
+          img.style.setProperty('--spill-color', `rgba(${r}, ${g}, ${b}, 0.18)`);
+        } else {
+          img.style.setProperty('--spill-color', `rgba(${r}, ${g}, ${b}, 0.25)`);
+        }
       } catch {
         // Cross-origin image, keep CSS fallback
       }
     }
 
     function processImages() {
-      document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+      document.querySelectorAll<HTMLImageElement>('.prose img, .post__hero').forEach((img) => {
+        if (img.hasAttribute('data-spill')) return;
+        img.setAttribute('data-spill', '');
         if (img.complete && img.naturalWidth > 0) {
           extractDominantColor(img);
         } else {
@@ -139,6 +150,10 @@ const dateStr = pubDate.toISOString().split('T')[0];
 
     processImages();
     document.addEventListener('astro:page-load', processImages);
+    // Also handle lazy-loaded images that enter the DOM later
+    if ('MutationObserver' in window) {
+      new MutationObserver(processImages).observe(document.body, { childList: true, subtree: true });
+    }
   </script>
 </BaseLayout>
 
@@ -189,6 +204,9 @@ const dateStr = pubDate.toISOString().split('T')[0];
     width: 100%;
     border-radius: var(--radius-md);
     margin-bottom: var(--space-6);
+    --spill-color: rgba(226, 160, 82, 0.15);
+    box-shadow: 0 8px 40px var(--spill-color), 0 2px 12px rgba(0, 0, 0, 0.15);
+    transition: box-shadow var(--transition-slow);
   }
 
   .post__updated {

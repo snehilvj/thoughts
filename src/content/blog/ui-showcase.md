@@ -6,10 +6,13 @@ tags: ["tech", "meta", "webdev"]
 draft: false
 sources:
   - title: "Astro Documentation"
+    description: "Official docs for the Astro static site generator used to build this blog."
     url: "https://docs.astro.build"
   - title: "Shiki Syntax Highlighter"
+    description: "Build-time syntax highlighting engine with dual-theme support."
     url: "https://shiki.style"
   - title: "Mermaid Diagram Syntax"
+    description: "Declarative diagramming language for flowcharts, sequence diagrams, and more."
     url: "https://mermaid.js.org/intro/"
 ---
 

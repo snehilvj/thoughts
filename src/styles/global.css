@@ -199,7 +199,7 @@ main {
 
 /* Light theme: code block styling */
 [data-theme='light'] .prose pre {
-  border-color: rgba(0, 0, 0, 0.12);
+  border-color: var(--color-border-strong);
 }
 
 /* --- Prose --- */
@@ -232,7 +232,7 @@ main {
 .prose a {
   color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(226, 160, 82, 0.4);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
   padding-bottom: 1px;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
@@ -425,7 +425,78 @@ pre.mermaid svg {
 
 /* Light theme: mermaid block styling */
 [data-theme='light'] pre.mermaid {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+  border-color: var(--color-border-strong) !important;
+}
+
+/* Light theme: override mermaid SVG colors */
+[data-theme='light'] pre.mermaid .node rect,
+[data-theme='light'] pre.mermaid .node polygon,
+[data-theme='light'] pre.mermaid .node circle {
+  fill: var(--color-bg-elevated) !important;
+  stroke: var(--color-accent) !important;
+}
+
+[data-theme='light'] pre.mermaid .node .label,
+[data-theme='light'] pre.mermaid .nodeLabel,
+[data-theme='light'] pre.mermaid text {
+  fill: var(--color-text) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid .edgePath .path,
+[data-theme='light'] pre.mermaid .flowchart-link {
+  stroke: var(--color-text-secondary) !important;
+}
+
+[data-theme='light'] pre.mermaid .edgeLabel {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid .edgeLabel rect {
+  fill: var(--color-bg) !important;
+  opacity: 1 !important;
+}
+
+[data-theme='light'] pre.mermaid .marker {
+  fill: var(--color-text-secondary) !important;
+  stroke: var(--color-text-secondary) !important;
+}
+
+/* Light: sequence diagram */
+[data-theme='light'] pre.mermaid .actor {
+  fill: var(--color-bg-elevated) !important;
+  stroke: var(--color-accent) !important;
+}
+
+[data-theme='light'] pre.mermaid text.actor > tspan {
+  fill: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid .messageLine0,
+[data-theme='light'] pre.mermaid .messageLine1 {
+  stroke: var(--color-text-secondary) !important;
+}
+
+[data-theme='light'] pre.mermaid .messageText {
+  fill: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid .loopLine {
+  stroke: var(--color-text-muted) !important;
+}
+
+[data-theme='light'] pre.mermaid .note {
+  fill: var(--color-accent-subtle) !important;
+  stroke: var(--color-accent) !important;
+}
+
+[data-theme='light'] pre.mermaid .noteText {
+  fill: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid line {
+  stroke: var(--color-text-muted) !important;
 }
 
 /* --- Tags --- */
@@ -444,7 +515,7 @@ pre.mermaid svg {
 
 /* --- Selection --- */
 ::selection {
-  background: rgba(226, 160, 82, 0.2);
+  background: color-mix(in srgb, var(--color-accent) 20%, transparent);
   color: var(--color-text);
 }
 

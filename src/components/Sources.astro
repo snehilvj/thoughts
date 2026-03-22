@@ -1,6 +1,7 @@
 ---
 interface Source {
   title: string;
+  description?: string;
   url: string;
 }
 
@@ -17,10 +18,15 @@ const { sources } = Astro.props;
     <ol class="sources__list">
       {sources.map((source) => (
         <li class="sources__item">
-          <a href={source.url} target="_blank" rel="noopener noreferrer" class="sources__link">
-            {source.title}
-            <span class="sources__url">{new URL(source.url).hostname}</span>
-          </a>
+          <div class="sources__content">
+            <a href={source.url} target="_blank" rel="noopener noreferrer" class="sources__link">
+              {source.title}
+              <span class="sources__url">{new URL(source.url).hostname}</span>
+            </a>
+            {source.description && (
+              <p class="sources__desc">{source.description}</p>
+            )}
+          </div>
         </li>
       ))}
     </ol>
@@ -85,5 +91,18 @@ const { sources } = Astro.props;
   .sources__url {
     font-size: 0.75rem;
     color: var(--color-text-muted);
+  }
+
+  .sources__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .sources__desc {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
   }
 </style>
