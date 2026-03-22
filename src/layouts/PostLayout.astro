@@ -91,6 +91,55 @@ const dateStr = pubDate.toISOString().split('T')[0];
       ...(heroImage ? { image: new URL(heroImage, SITE.url).href } : {}),
     })}
   />
+
+  <script>
+    function extractDominantColor(img: HTMLImageElement) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const size = 64;
+      canvas.width = size;
+      canvas.height = size;
+
+      try {
+        ctx.drawImage(img, 0, 0, size, size);
+        const data = ctx.getImageData(0, 0, size, size).data;
+
+        let r = 0, g = 0, b = 0, count = 0;
+        for (let i = 0; i < data.length; i += 16) {
+          const a = data[i + 3];
+          if (a < 128) continue;
+          r += data[i];
+          g += data[i + 1];
+          b += data[i + 2];
+          count++;
+        }
+
+        if (count === 0) return;
+        r = Math.round(r / count);
+        g = Math.round(g / count);
+        b = Math.round(b / count);
+
+        img.style.setProperty('--spill-color', `rgba(${r}, ${g}, ${b}, 0.25)`);
+      } catch {
+        // Cross-origin image, keep CSS fallback
+      }
+    }
+
+    function processImages() {
+      document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+        if (img.complete && img.naturalWidth > 0) {
+          extractDominantColor(img);
+        } else {
+          img.addEventListener('load', () => extractDominantColor(img), { once: true });
+        }
+      });
+    }
+
+    processImages();
+    document.addEventListener('astro:page-load', processImages);
+  </script>
 </BaseLayout>
 
 <style>

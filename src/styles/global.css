@@ -378,11 +378,9 @@ main {
 .prose img {
   border-radius: var(--radius-md);
   margin: 2em auto;
-  box-shadow: 0 8px 40px rgba(226, 160, 82, 0.15), 0 2px 12px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme='light'] .prose img {
-  box-shadow: 0 8px 40px rgba(184, 125, 48, 0.12), 0 2px 12px rgba(0, 0, 0, 0.08);
+  --spill-color: rgba(226, 160, 82, 0.15);
+  box-shadow: 0 8px 40px var(--spill-color), 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow var(--transition-slow);
 }
 
 /* Broken image fallback */
