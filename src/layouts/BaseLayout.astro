@@ -60,11 +60,7 @@ const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, 
     <script is:inline>
       (function () {
         const stored = localStorage.getItem('theme');
-        const preferred = window.matchMedia('(prefers-color-scheme: dark)')
-          .matches
-          ? 'dark'
-          : 'light';
-        document.documentElement.dataset.theme = stored || preferred;
+        document.documentElement.dataset.theme = stored || 'dark';
       })();
     </script>
   </head>

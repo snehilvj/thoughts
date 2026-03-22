@@ -8,7 +8,7 @@
   const label = toggle?.querySelector('.theme-toggle__label') as HTMLSpanElement;
 
   function updateLabel() {
-    const theme = document.documentElement.dataset.theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const theme = document.documentElement.dataset.theme || 'dark';
     if (label) label.textContent = theme === 'dark' ? 'light' : 'dark';
   }
 
