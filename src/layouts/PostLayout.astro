@@ -2,7 +2,6 @@
 import BaseLayout from './BaseLayout.astro';
 import TagList from '../components/TagList.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
-import Mermaid from '../components/Mermaid.astro';
 import { getReadingTime } from '../utils/readingTime';
 import { SITE } from '../config';
 
@@ -64,8 +63,6 @@ const dateStr = pubDate.toISOString().split('T')[0];
 
     <RelatedPosts currentSlug={slug} currentTags={tags} />
   </article>
-
-  <Mermaid />
 
   <script
     type="application/ld+json"

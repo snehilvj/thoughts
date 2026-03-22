@@ -370,6 +370,35 @@ main {
   margin: 2em auto;
 }
 
+/* --- Mermaid diagrams --- */
+pre.mermaid {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--space-5) !important;
+  min-height: 120px !important;
+}
+
+pre.mermaid:not([data-processed]) {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 25%,
+    var(--color-bg-hover) 50%,
+    var(--color-bg-elevated) 75%
+  ) !important;
+  background-size: 200% 100% !important;
+}
+
+pre.mermaid[data-processed] {
+  background: var(--color-bg-elevated) !important;
+  min-height: auto !important;
+}
+
+pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
 /* --- Tags --- */
 .tag {
   display: inline-block;
