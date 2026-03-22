@@ -25,6 +25,8 @@ export function setupInteractions(
     destroy() {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('click', onClick);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchstart', onTouchStart);
     },
   };
 
@@ -64,8 +66,43 @@ export function setupInteractions(
     }
   }
 
+  function onTouchMove(e: TouchEvent) {
+    const touch = e.touches[0];
+    if (!touch) return;
+    state.mouseX = touch.clientX;
+    state.mouseY = touch.clientY;
+    resetIdleTimer();
+  }
+
+  function onTouchStart(e: TouchEvent) {
+    const touch = e.touches[0];
+    if (!touch) return;
+    state.mouseX = touch.clientX;
+    state.mouseY = touch.clientY;
+    resetIdleTimer();
+
+    // Hit test for tap on figure
+    const rect = getCanvasRect();
+    const canvasX = touch.clientX - rect.left;
+    const canvasY = touch.clientY - rect.top;
+
+    const dx = canvasX - skeleton.head.x;
+    const dy = canvasY - skeleton.head.y;
+    const bodyDx = canvasX - skeleton.hip.x;
+    const bodyDy = canvasY - skeleton.hip.y;
+
+    const headHit = Math.sqrt(dx * dx + dy * dy) < HEAD_RADIUS * 3;
+    const bodyHit = Math.abs(bodyDx) < 20 && bodyDy > -40 && bodyDy < 40;
+
+    if ((headHit || bodyHit) && stateController.current !== 'waving') {
+      stateController.transition('waving');
+    }
+  }
+
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('click', onClick);
+  document.addEventListener('touchmove', onTouchMove, { passive: true });
+  document.addEventListener('touchstart', onTouchStart, { passive: true });
 
   return state;
 }
