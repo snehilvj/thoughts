@@ -3,34 +3,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config';
 ---
 
-<BaseLayout title="About" description={`About ${SITE.author} — software engineer, startup founder, and writer.`}>
+<BaseLayout title="About" description={`About ${SITE.author} — software engineer, startup founder.`}>
   <div class="about container">
-    <h1 class="about__title">About</h1>
+    <p class="prompt">cat about.txt</p>
 
     <div class="about__content prose">
+      <h2>{SITE.author}</h2>
+
       <p>
-        Hey, I'm <strong>Snehil Vijay</strong> — a software engineer and startup founder.
-        I build things for a living and write about the journey here.
+        Software engineer. Startup founder. Habitual overthinker.
       </p>
 
       <p>
-        This blog is my corner of the internet where I share thoughts on
-        software engineering, the startup grind, technology opinions, and
-        life beyond the screen — from travel stories to food discoveries.
+        I build software for a living and think about everything else in between.
+        This blog is where those thoughts end up — sometimes technical, sometimes personal,
+        sometimes just opinions I needed to get out of my head.
       </p>
 
-      <h2>What I write about</h2>
+      <p>What you'll find here:</p>
+
       <ul>
-        <li><strong>Tech</strong> — deep dives into tools, frameworks, and engineering decisions</li>
-        <li><strong>Startup</strong> — lessons from building a company, product thinking, growth</li>
-        <li><strong>Opinions</strong> — takes on the industry, developer culture, and trends</li>
-        <li><strong>Life</strong> — travel, food, experiences, and everything in between</li>
+        <li><strong>Tech</strong> — engineering deep-dives, tools, and things I've built</li>
+        <li><strong>Startup</strong> — the messy reality of building a company</li>
+        <li><strong>Opinions</strong> — takes on industry, culture, and whatever else</li>
+        <li><strong>Life</strong> — travel, food, and the non-code parts of existence</li>
       </ul>
 
-      <h2>Connect</h2>
       <p>
-        Find me on <a href={SITE.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>,
-        or subscribe to the <a href={`${import.meta.env.BASE_URL}rss.xml`}>RSS feed</a> to stay updated.
+        Find me on <a href={SITE.social.github} target="_blank" rel="noopener noreferrer">github</a>
+        or subscribe to the <a href={`${import.meta.env.BASE_URL}rss.xml`}>rss feed</a>.
       </p>
     </div>
   </div>
@@ -41,8 +42,7 @@ import { SITE } from '../config';
     padding: 3rem 1.5rem 4rem;
   }
 
-  .about__title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+  .about__content {
+    margin-top: 2rem;
   }
 </style>

@@ -10,13 +10,13 @@ const tagList = Array.from(allTags.keys()).sort();
 
 <BaseLayout title="Blog" description="All posts — tech, opinions, startup life, and more.">
   <div class="blog-listing container">
-    <h1 class="blog-listing__title">All thoughts</h1>
+    <p class="prompt">ls posts/</p>
 
     {tagList.length > 0 && (
       <div class="blog-listing__tags" id="tag-filter">
-        <button class="tag-filter-btn active" data-tag="all">all</button>
+        <button class="tag-filter-btn active" data-tag="all">[all]</button>
         {tagList.map((tag) => (
-          <button class="tag-filter-btn" data-tag={tag}>{tag}</button>
+          <button class="tag-filter-btn" data-tag={tag}>[{tag}]</button>
         ))}
       </div>
     )}
@@ -38,7 +38,7 @@ const tagList = Array.from(allTags.keys()).sort();
 
 <script>
   const filterBtns = document.querySelectorAll('.tag-filter-btn');
-  const posts = document.querySelectorAll('.post-card');
+  const posts = document.querySelectorAll('.post-entry');
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -64,36 +64,28 @@ const tagList = Array.from(allTags.keys()).sort();
     padding: 3rem 1.5rem 4rem;
   }
 
-  .blog-listing__title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
   .blog-listing__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 2rem;
+    gap: 0.5rem;
+    margin: 1.5rem 0 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .tag-filter-btn {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    padding: 0.25em 0.75em;
-    border-radius: 999px;
-    border: 1px solid var(--color-border);
+    font-size: 0.8rem;
+    padding: 0;
+    border: none;
     background: transparent;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: color var(--transition-fast);
   }
 
   .tag-filter-btn:hover,
   .tag-filter-btn.active {
-    background: var(--color-accent);
-    border-color: var(--color-accent);
-    color: #fff;
+    color: var(--color-accent);
   }
 </style>

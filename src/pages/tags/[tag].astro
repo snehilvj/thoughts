@@ -17,15 +17,12 @@ export async function getStaticPaths() {
 }
 
 const { tag, posts } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={`Posts tagged "${tag}"`} description={`All posts tagged with "${tag}".`}>
   <div class="tag-page container">
-    <h1 class="tag-page__title">
-      <span class="tag-page__label">Tagged</span>
-      {tag}
-    </h1>
-    <p class="tag-page__count">{posts.length} post{posts.length !== 1 ? 's' : ''}</p>
+    <p class="prompt">grep "{tag}" posts/ <span class="tag-page__count">{posts.length} result{posts.length !== 1 ? 's' : ''}</span></p>
 
     <div class="tag-page__posts">
       {posts.map((post: any) => (
@@ -40,7 +37,7 @@ const { tag, posts } = Astro.props;
       ))}
     </div>
 
-    <a href={`${import.meta.env.BASE_URL}tags`} class="tag-page__back">&larr; All tags</a>
+    <a href={`${base}tags`} class="tag-page__back">&larr; cd ../tags/</a>
   </div>
 </BaseLayout>
 
@@ -49,28 +46,18 @@ const { tag, posts } = Astro.props;
     padding: 3rem 1.5rem 4rem;
   }
 
-  .tag-page__title {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .tag-page__label {
-    color: var(--color-text-muted);
-    font-weight: 400;
-    margin-right: 0.3em;
-  }
-
   .tag-page__count {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
     color: var(--color-text-muted);
-    margin-bottom: 2rem;
+    margin-left: 1rem;
+  }
+
+  .tag-page__posts {
+    margin-top: 1.5rem;
   }
 
   .tag-page__back {
     display: inline-block;
     margin-top: 2rem;
-    font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--color-accent);
   }

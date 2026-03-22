@@ -10,7 +10,7 @@ This post exists to showcase every visual element the blog supports. Think of it
 
 ## Headings
 
-The heading hierarchy uses Lora (serif) with decreasing sizes. Each level has distinct visual weight.
+The heading hierarchy uses JetBrains Mono with decreasing sizes. All monospace, all the time.
 
 ### Third-level heading
 
@@ -22,7 +22,7 @@ For fine-grained organization. Rarely needed, but available.
 
 ## Text Formatting
 
-Regular paragraph text is set in Geist Sans at 18px with generous 1.8 line-height. It should feel comfortable to read for long stretches — like a good book, not a technical manual.
+Regular paragraph text is set in JetBrains Mono at 15px with generous line-height. The terminal aesthetic means everything is monospace — readable but with character.
 
 Here's **bold text** for emphasis, *italic text* for tone, and ***bold italic*** when you really mean it. You can also use `inline code` for technical terms like `useState` or `docker-compose.yml`.
 
@@ -182,8 +182,7 @@ When you run `pnpm run dev`, the server starts on `http://localhost:4321`. The `
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Dark mode | Done | CSS custom properties + localStorage |
-| Search | Done | Client-side JSON index, Cmd+K |
-| Tags | Done | Category-colored pills |
+| Tags | Done | [bracket] notation |
 | RSS | Done | Auto-generated at `/rss.xml` |
 | SEO | Done | OG tags, JSON-LD, sitemap |
 | LLM SEO | Done | `llms.txt` + `llms-full.txt` |
@@ -193,7 +192,7 @@ When you run `pnpm run dev`, the server starts on `http://localhost:4321`. The `
 | Technology | Purpose | Bundle Size | Why Chosen |
 |-----------|---------|-------------|------------|
 | Astro | Static site gen | ~0KB client JS | Content-first, fast builds |
-| Three.js | 3D hero | ~150KB (tree-shaken) | Industry standard, well documented |
+| JetBrains Mono | Typography | ~50KB | Monospace with ligatures |
 | Shiki | Syntax highlighting | 0KB (build-time) | Built into Astro, dual-theme |
 | Vanilla CSS | Styling | ~8KB | Full control, no framework overhead |
 
@@ -207,7 +206,7 @@ Content after the rule. Horizontal rules create visual breathing room between di
 
 ## Images
 
-Images get rounded corners and auto-centering. If you add a hero image to your frontmatter, it appears at the top of the post.
+Images are displayed inline with no rounded corners — raw and clean, matching the terminal aesthetic.
 
 ## Combining Elements
 
@@ -226,22 +225,19 @@ const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches
 document.documentElement.dataset.theme = stored || preferred;
 ```
 
-3. **A mutation observer** on the 3D scene watches for theme changes and updates Three.js material colors
-
-> This three-layer approach ensures zero flash of wrong theme, smooth transitions, and consistent 3D colors — all without a framework.
+> This two-layer approach ensures zero flash of wrong theme and smooth transitions — all without a framework.
 
 The result is a seamless experience where:
 
 - First visit respects system preference
 - Manual toggle persists across sessions
-- The 3D hero adapts its color palette in real-time
 - Code blocks switch between `github-light` and `github-dark` themes
 
 ## Long-form Prose
 
-This paragraph is intentionally longer to demonstrate how the blog handles extended prose. The line-height of 1.8 and max-width of 680px create a comfortable reading measure — roughly 65-75 characters per line, which research suggests is optimal for sustained reading. The serif headings (Lora) provide visual anchors as you scan, while the sans-serif body (Geist Sans) stays clean and legible. The drop cap on the first paragraph of each post adds a magazine-like touch without being kitschy.
+This paragraph is intentionally longer to demonstrate how the blog handles extended prose. Monospace text at 15px with generous line-height and a 700px max-width creates a comfortable reading measure. The terminal aesthetic means every character takes the same space — which gives prose a distinctive rhythm. It's not how most blogs look, and that's the point.
 
-Good typography isn't about picking fancy fonts. It's about invisible decisions — line-height, letter-spacing, font-size ratios, measure width — that make reading feel effortless. You shouldn't notice the typography. You should just notice that you've been reading for five minutes and it felt easy.
+Good typography isn't about picking fancy fonts. It's about invisible decisions — line-height, letter-spacing, font-size ratios, measure width — that make reading feel effortless. Even in monospace, the right spacing makes long-form content feel natural.
 
 ---
 

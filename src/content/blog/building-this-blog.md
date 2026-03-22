@@ -1,6 +1,6 @@
 ---
 title: "How I Built This Blog"
-description: "A technical walkthrough of building a personal blog with Astro, Three.js, and zero frameworks — including the interactive 3D hero."
+description: "A technical walkthrough of building a terminal-inspired personal blog with Astro and vanilla CSS — no frameworks, no fuss."
 pubDate: 2026-03-22
 tags: ["tech", "webdev", "astro"]
 ---
@@ -10,11 +10,11 @@ I spent way too long thinking about how to build this blog. The irony of enginee
 ## The stack
 
 - **Astro** for static site generation
-- **Three.js** for the interactive 3D hero
+- **JetBrains Mono** — monospace everything
 - **Vanilla CSS** with custom properties for theming
 - **Zero frontend frameworks** — no React, no Vue, no Svelte
 
-The whole thing ships almost zero JavaScript to the browser, except for the Three.js scene on the homepage and a few small interactive bits (theme toggle, search).
+The whole thing ships almost zero JavaScript to the browser. Just a theme toggle. The terminal-inspired aesthetic means no fancy graphics, no animations — just text on a dark background, the way a blog should be.
 
 ## Why Astro?
 
@@ -35,21 +35,11 @@ const blog = defineCollection({
 
 The built-in Shiki integration means code blocks look good without any extra dependencies. And the dual-theme support means code highlighting respects dark/light mode automatically.
 
-## The 3D hero
+## The terminal aesthetic
 
-The homepage features a morphing icosahedron built with Three.js. It's a wireframe geometry that subtly distorts using a noise function and responds to mouse movement.
+Most blogs look the same — serif headings, sans-serif body, card layouts, hero images. I wanted something different. The entire site is set in JetBrains Mono. Navigation uses file-path prompts (`~/thoughts $`). Posts are listed like log entries. Tags use `[brackets]` instead of colored pills.
 
-The key was making it *feel* organic without being distracting:
-
-```javascript
-const displacement = noise3D(
-  ox + time * 0.3,
-  oy + time * 0.2,
-  oz + time * 0.4
-) * 0.15;
-```
-
-Small displacement values, slow time multipliers. The effect is meditative rather than chaotic.
+It's not for everyone, but it's *mine*. And it loads fast.
 
 ## Dark mode done right
 

@@ -6,29 +6,14 @@ interface Props {
 
 const { tags, linked = true } = Astro.props;
 const base = import.meta.env.BASE_URL;
-
-const tagCategories: Record<string, string> = {
-  tech: 'tech', webdev: 'tech', astro: 'tech', javascript: 'tech', typescript: 'tech', python: 'tech',
-  opinions: 'opinions', meta: 'opinions',
-  personal: 'life', travel: 'life', food: 'life', life: 'life',
-  startup: 'startup', business: 'startup', entrepreneurship: 'startup',
-};
-
-function getCategory(tag: string): string {
-  return tagCategories[tag.toLowerCase()] || '';
-}
 ---
 
 <div class="tag-list">
   {tags.map((tag) =>
     linked ? (
-      <a href={`${base}tags/${tag}`} class="tag" data-category={getCategory(tag)}>
-        {tag}
-      </a>
+      <a href={`${base}tags/${tag}`} class="tag">[{tag}]</a>
     ) : (
-      <span class="tag" data-category={getCategory(tag)}>
-        {tag}
-      </span>
+      <span class="tag">[{tag}]</span>
     )
   )}
 </div>
@@ -37,6 +22,6 @@ function getCategory(tag: string): string {
   .tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 </style>
