@@ -103,6 +103,7 @@ body {
   background-color: var(--color-bg);
   min-height: 100vh;
   transition: background-color var(--transition-base);
+  clip-path: inset(0);
 }
 
 .content-curtain::before {
