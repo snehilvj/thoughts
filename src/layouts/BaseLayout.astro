@@ -1,7 +1,6 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FlyingCreatures from '../components/FlyingCreatures.astro';
 import { SITE } from '../config';
 import '../styles/global.css';
 
@@ -70,15 +69,11 @@ const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, 
     </script>
   </head>
   <body>
-    <FlyingCreatures />
-    <div class="content-curtain">
-      <a href="#main-content" class="sr-only">Skip to content</a>
-      <Header />
-      <main id="main-content">
-        <slot />
-      </main>
-      <Footer />
-    </div>
-    <div class="canvas-reveal-spacer" aria-hidden="true"></div>
+    <a href="#main-content" class="sr-only">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
