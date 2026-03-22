@@ -26,6 +26,7 @@
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
 
     // Icosahedron with organic displacement
     const geometry = new THREE.IcosahedronGeometry(1.5, 4);
@@ -141,13 +142,23 @@
 
     animate();
 
-    // Resize handler
+    // Resize handler — debounced and only on real width changes
+    // to prevent mobile scroll-triggered viewport resizes from causing zoom
+    let lastWidth = container.clientWidth;
+    let resizeTimer: ReturnType<typeof setTimeout>;
+
     function onResize() {
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const w = container.clientWidth;
+        // Only resize if width actually changed (ignore mobile address bar hide/show)
+        if (Math.abs(w - lastWidth) < 2) return;
+        lastWidth = w;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }, 100);
     }
 
     window.addEventListener('resize', onResize);
