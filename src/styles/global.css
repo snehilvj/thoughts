@@ -197,6 +197,11 @@ main {
   background-color: transparent !important;
 }
 
+/* Light theme: code block styling */
+[data-theme='light'] .prose pre {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
 /* --- Prose --- */
 .prose {
   line-height: 1.8;
@@ -288,12 +293,12 @@ main {
   font-size: 0.85rem;
   line-height: 1.6;
   background: var(--color-code-bg) !important;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
   padding: var(--space-5);
   overflow-x: hidden !important;
   margin: 1.5em 0;
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   position: relative;
 }
 
@@ -315,13 +320,15 @@ main {
   float: right;
   top: 0;
   right: 0;
-  padding: 0.15em 0.5em;
+  padding: 0.2em 0.6em;
   margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) 0 0;
   font-size: 0.65rem;
   color: var(--color-text-muted);
   background: var(--color-bg-elevated);
   border-bottom-left-radius: var(--radius-sm);
   border-top-right-radius: calc(var(--radius-md) - 1px);
+  border-left: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   letter-spacing: 0.03em;
   text-transform: uppercase;
   pointer-events: none;
@@ -372,6 +379,9 @@ main {
 .prose img {
   border-radius: var(--radius-md);
   margin: 2em auto;
+  --spill-color: rgba(226, 160, 82, 0.15);
+  box-shadow: 0 8px 40px var(--spill-color), 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: box-shadow var(--transition-slow);
 }
 
 /* Broken image fallback */
@@ -387,7 +397,7 @@ main {
 /* --- Mermaid diagrams --- */
 pre.mermaid {
   background: var(--color-bg-elevated) !important;
-  border: 1px solid var(--color-border) !important;
+  border: 1px solid var(--color-border-strong) !important;
   border-radius: var(--radius-md) !important;
   padding: var(--space-5) !important;
   min-height: 120px !important;
@@ -411,6 +421,11 @@ pre.mermaid[data-processed] {
 pre.mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+/* Light theme: mermaid block styling */
+[data-theme='light'] pre.mermaid {
+  border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
 /* --- Tags --- */
@@ -473,4 +488,7 @@ pre.mermaid svg {
     padding: 0 var(--space-4);
   }
 
+  body {
+    background-attachment: scroll;
+  }
 }
