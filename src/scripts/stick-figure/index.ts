@@ -1,24 +1,21 @@
 import { createSkeleton, updateSkeleton } from './skeleton';
-import { draw, type ThemeColors } from './renderer';
+import { draw, setupCanvas, type ThemeColors } from './renderer';
 import { createStateController } from './states';
-import { setupInteractions, updateFromMouse, checkIdleTimeout } from './interactions';
+import { setupInteractions, updateFromPointer, checkIdleTimeout } from './interactions';
+
+const LOGICAL_WIDTH = 150;
+const LOGICAL_HEIGHT = 180;
 
 export function init(canvas: HTMLCanvasElement): () => void {
   const ctx = canvas.getContext('2d');
   if (!ctx) return () => {};
 
-  const dpr = window.devicePixelRatio || 1;
-  const logicalWidth = 120;
-  const logicalHeight = 140;
+  // Setup canvas with correct DPR
+  setupCanvas(canvas, LOGICAL_WIDTH, LOGICAL_HEIGHT);
 
-  canvas.width = logicalWidth * dpr;
-  canvas.height = logicalHeight * dpr;
-  canvas.style.width = `${logicalWidth}px`;
-  canvas.style.height = `${logicalHeight}px`;
-
-  // Figure anchor point (center-bottom of canvas)
-  const baseX = logicalWidth / 2;
-  const baseY = logicalHeight - 40;
+  // Figure anchor: center-x, positioned so feet are near bottom
+  const baseX = LOGICAL_WIDTH / 2;
+  const baseY = LOGICAL_HEIGHT - 60;
 
   const skeleton = createSkeleton(baseX, baseY);
   const stateController = createStateController();
@@ -30,8 +27,14 @@ export function init(canvas: HTMLCanvasElement): () => void {
   const interaction = setupInteractions(canvas, skeleton, stateController, getCanvasRect);
 
   let colors = readThemeColors();
+
+  // Theme change observer
   const themeObserver = new MutationObserver(() => {
     colors = readThemeColors();
+    // Trigger shielding reaction
+    if (stateController.current === 'idle' || stateController.current === 'sleeping') {
+      stateController.transition('shielding');
+    }
   });
   themeObserver.observe(document.documentElement, {
     attributes: true,
@@ -42,7 +45,6 @@ export function init(canvas: HTMLCanvasElement): () => void {
   let animationId = 0;
   let paused = false;
 
-  // Respect reduced motion
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function loop(now: number) {
@@ -51,29 +53,19 @@ export function init(canvas: HTMLCanvasElement): () => void {
       return;
     }
 
-    const dt = Math.min((now - lastTime) / 1000, 0.1); // Cap at 100ms
+    const dt = Math.min((now - lastTime) / 1000, 0.1);
     lastTime = now;
 
-    // Check idle timeout
     checkIdleTimeout(interaction, stateController);
-
-    // Update state
     stateController.update(skeleton, dt, baseX, baseY);
-
-    // Update from mouse
-    updateFromMouse(skeleton, interaction, getCanvasRect());
-
-    // Smooth interpolation
+    updateFromPointer(skeleton, interaction, getCanvasRect());
     updateSkeleton(skeleton, dt);
-
-    // Draw
     draw(ctx!, skeleton, colors, stateController.zzzParticles);
 
     animationId = requestAnimationFrame(loop);
   }
 
   if (reducedMotion) {
-    // Just draw a single static frame
     stateController.update(skeleton, 0, baseX, baseY);
     updateSkeleton(skeleton, 1);
     draw(ctx, skeleton, colors, []);
@@ -81,21 +73,25 @@ export function init(canvas: HTMLCanvasElement): () => void {
     animationId = requestAnimationFrame(loop);
   }
 
-  // Pause when tab is hidden
+  // Pause when tab hidden
   function onVisibilityChange() {
     paused = document.hidden;
-    if (!paused) {
-      lastTime = performance.now();
-    }
+    if (!paused) lastTime = performance.now();
   }
   document.addEventListener('visibilitychange', onVisibilityChange);
 
-  // Cleanup function
+  // Re-setup canvas on resize (handles orientation change + DPR change)
+  function onResize() {
+    setupCanvas(canvas, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+  }
+  window.addEventListener('resize', onResize);
+
   return () => {
     cancelAnimationFrame(animationId);
     interaction.destroy();
     themeObserver.disconnect();
     document.removeEventListener('visibilitychange', onVisibilityChange);
+    window.removeEventListener('resize', onResize);
   };
 }
 
@@ -104,5 +100,6 @@ function readThemeColors(): ThemeColors {
   return {
     stroke: styles.getPropertyValue('--color-text').trim() || '#1a1a2e',
     accent: styles.getPropertyValue('--color-accent').trim() || '#e2a052',
+    bg: styles.getPropertyValue('--color-bg').trim() || '#faf9f6',
   };
 }
