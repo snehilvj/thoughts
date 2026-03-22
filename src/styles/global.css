@@ -428,6 +428,24 @@ pre.mermaid svg {
   border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
+/* Light theme: fix mermaid flowchart node labels (black-on-black issue) */
+[data-theme='light'] pre.mermaid .node rect,
+[data-theme='light'] pre.mermaid .node circle,
+[data-theme='light'] pre.mermaid .node polygon {
+  fill: #ECECFF !important;
+  stroke: #9370DB !important;
+}
+
+[data-theme='light'] pre.mermaid .nodeLabel,
+[data-theme='light'] pre.mermaid .edgeLabel {
+  color: #333 !important;
+}
+
+[data-theme='light'] pre.mermaid .edgeLabel rect {
+  fill: var(--color-bg-elevated) !important;
+  stroke: none !important;
+}
+
 /* --- Tags --- */
 .tag {
   display: inline-block;
