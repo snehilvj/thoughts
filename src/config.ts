@@ -6,5 +6,6 @@ export const SITE = {
   tagline: 'Software, startups, and everything in between.',
   social: {
     github: 'https://github.com/snehilvj',
+    linkedin: 'https://www.linkedin.com/in/snehilvj',
   },
 };
