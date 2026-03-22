@@ -289,13 +289,15 @@ main {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  overflow-x: auto;
+  overflow-x: hidden;
   margin: 1.5em 0;
   box-shadow: var(--shadow-sm);
   position: relative;
 }
 
 .prose pre code {
+  display: block;
+  overflow-x: auto;
   background: none !important;
   border: none;
   border-radius: 0;
@@ -469,7 +471,4 @@ pre.mermaid svg {
     padding: 0 var(--space-4);
   }
 
-  body {
-    background-image: none;
-  }
 }
