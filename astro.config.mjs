@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://snehilvj.github.io',
-  base: '/thoughts',
+  base: '/thoughts/',
   integrations: [sitemap()],
   markdown: {
     shikiConfig: {

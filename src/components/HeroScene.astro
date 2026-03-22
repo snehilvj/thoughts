@@ -26,6 +26,7 @@
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
 
     // Icosahedron with organic displacement
     const geometry = new THREE.IcosahedronGeometry(1.5, 4);
@@ -34,33 +35,17 @@
 
     // Wireframe material
     const wireframeMat = new THREE.MeshBasicMaterial({
-      color: new THREE.Color('#6366f1'),
+      color: new THREE.Color('#818cf8'),
       wireframe: true,
       transparent: true,
-      opacity: 0.3,
-    });
-
-    // Solid material (subtle fill)
-    const solidMat = new THREE.MeshPhongMaterial({
-      color: new THREE.Color('#6366f1'),
-      transparent: true,
-      opacity: 0.05,
-      shininess: 100,
+      opacity: 0.35,
     });
 
     const wireframeMesh = new THREE.Mesh(geometry, wireframeMat);
-    const solidMesh = new THREE.Mesh(geometry.clone(), solidMat);
 
     const group = new THREE.Group();
     group.add(wireframeMesh);
-    group.add(solidMesh);
     scene.add(group);
-
-    // Ambient + directional light
-    scene.add(new THREE.AmbientLight(0x6366f1, 0.3));
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    dirLight.position.set(5, 5, 5);
-    scene.add(dirLight);
 
     // Floating particles
     const particleCount = 80;
@@ -141,13 +126,23 @@
 
     animate();
 
-    // Resize handler
+    // Resize handler — debounced and only on real width changes
+    // to prevent mobile scroll-triggered viewport resizes from causing zoom
+    let lastWidth = container.clientWidth;
+    let resizeTimer: ReturnType<typeof setTimeout>;
+
     function onResize() {
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const w = container.clientWidth;
+        // Only resize if width actually changed (ignore mobile address bar hide/show)
+        if (Math.abs(w - lastWidth) < 2) return;
+        lastWidth = w;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }, 100);
     }
 
     window.addEventListener('resize', onResize);
@@ -156,8 +151,7 @@
     const observer = new MutationObserver(() => {
       const isLight = document.documentElement.dataset.theme === 'light';
       wireframeMat.color.set(isLight ? '#6366f1' : '#818cf8');
-      wireframeMat.opacity = isLight ? 0.25 : 0.3;
-      solidMat.color.set(isLight ? '#6366f1' : '#818cf8');
+      wireframeMat.opacity = isLight ? 0.3 : 0.35;
       particleMat.color.set(isLight ? '#6366f1' : '#818cf8');
     });
 
