@@ -22,7 +22,7 @@ For fine-grained organization. Rarely needed, but available.
 
 ## Text Formatting
 
-Regular paragraph text is set in JetBrains Mono at 15px with generous line-height. The terminal aesthetic means everything is monospace — readable but with character.
+Regular paragraph text is set in JetBrains Mono at 15px with generous line-height. The monospace aesthetic means every character takes the same space — readable but with character.
 
 Here's **bold text** for emphasis, *italic text* for tone, and ***bold italic*** when you really mean it. You can also use `inline code` for technical terms like `useState` or `docker-compose.yml`.
 
@@ -32,7 +32,7 @@ Sometimes you need to ~~strike through~~ a thought. And sometimes you need a [li
 
 > The best code is no code at all. Every line of code you write is a line that needs to be maintained, debugged, and understood by the next person.
 
-Blockquotes get a left accent border and a subtle background. They should feel like a pull-quote or a notable aside.
+Blockquotes get a warm amber accent border, an elevated background with rounded corners. They should feel like a pull-quote or a notable aside.
 
 > **Nested emphasis works too.**
 >
@@ -142,15 +142,15 @@ echo "Done! Site is live."
 
 ```css
 :root {
-  --color-accent: #6366f1;
-  --font-heading: 'Lora', Georgia, serif;
-  --transition-base: 250ms ease;
+  --color-accent: #e2a052;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition-base: 200ms ease-out;
 }
 
 .post-card {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--color-border-subtle);
-  transition: transform var(--transition-fast);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-separator);
+  transition: color var(--transition-fast);
 }
 
 .post-card:hover .post-card__title {
@@ -182,7 +182,7 @@ When you run `pnpm run dev`, the server starts on `http://localhost:4321`. The `
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Dark mode | Done | CSS custom properties + localStorage |
-| Tags | Done | [bracket] notation |
+| Tags | Done | Dot-separated, plain text |
 | RSS | Done | Auto-generated at `/rss.xml` |
 | SEO | Done | OG tags, JSON-LD, sitemap |
 | LLM SEO | Done | `llms.txt` + `llms-full.txt` |
@@ -206,7 +206,7 @@ Content after the rule. Horizontal rules create visual breathing room between di
 
 ## Images
 
-Images are displayed inline with no rounded corners — raw and clean, matching the terminal aesthetic.
+Images are displayed inline with subtle rounded corners, matching the elevated surface aesthetic used throughout.
 
 ## Combining Elements
 
@@ -235,7 +235,7 @@ The result is a seamless experience where:
 
 ## Long-form Prose
 
-This paragraph is intentionally longer to demonstrate how the blog handles extended prose. Monospace text at 15px with generous line-height and a 700px max-width creates a comfortable reading measure. The terminal aesthetic means every character takes the same space — which gives prose a distinctive rhythm. It's not how most blogs look, and that's the point.
+This paragraph is intentionally longer to demonstrate how the blog handles extended prose. Monospace text at 15px with generous line-height and a 680px max-width creates a comfortable reading measure. Every character takes the same space — which gives prose a distinctive rhythm. It's not how most blogs look, and that's the point.
 
 Good typography isn't about picking fancy fonts. It's about invisible decisions — line-height, letter-spacing, font-size ratios, measure width — that make reading feel effortless. Even in monospace, the right spacing makes long-form content feel natural.
 
