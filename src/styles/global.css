@@ -117,7 +117,7 @@ body {
 
 /* Spacer that reveals the animation canvas when scrolled to */
 .canvas-reveal-spacer {
-  height: 100vh;
+  height: 50vh;
 }
 
 /* --- Typography --- */
