@@ -1,8 +1,7 @@
 ---
-const currentTheme = 'dark';
 ---
 
-<button class="theme-toggle" aria-label="Toggle theme">[<span class="theme-toggle__label">dark</span>]</button>
+<button class="theme-toggle" aria-label="Toggle theme"><span class="theme-toggle__label">dark</span></button>
 
 <script>
   const toggle = document.querySelector('.theme-toggle') as HTMLButtonElement;
@@ -27,7 +26,7 @@ const currentTheme = 'dark';
 <style>
   .theme-toggle {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background: none;
     border: none;
     color: var(--color-text-muted);
@@ -37,6 +36,6 @@ const currentTheme = 'dark';
   }
 
   .theme-toggle:hover {
-    color: var(--color-accent);
+    color: var(--color-text);
   }
 </style>

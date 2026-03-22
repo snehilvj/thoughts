@@ -13,11 +13,10 @@ const recentPosts = posts.slice(0, 5);
     <section class="home__hero">
       <h1 class="home__title">{SITE.title}<span class="cursor">_</span></h1>
       <p class="home__tagline">{SITE.tagline}</p>
-      <p class="home__author">by {SITE.author}</p>
     </section>
 
     <section class="home__recent">
-      <p class="prompt">cat recent.log</p>
+      <h2 class="home__section-label">Recent</h2>
 
       <div class="home__posts">
         {recentPosts.map((post) => (
@@ -33,7 +32,7 @@ const recentPosts = posts.slice(0, 5);
       </div>
 
       {posts.length > 5 && (
-        <a href={`${import.meta.env.BASE_URL}blog`} class="home__all prompt">cd blog/ →</a>
+        <a href={`${import.meta.env.BASE_URL}blog`} class="home__all">all posts &rarr;</a>
       )}
     </section>
   </div>
@@ -41,55 +40,61 @@ const recentPosts = posts.slice(0, 5);
 
 <style>
   .home {
-    padding: 2rem 1.5rem 4rem;
+    padding-bottom: var(--space-10);
   }
 
   .home__hero {
-    padding: 4rem 0 3rem;
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: 2rem;
+    padding: var(--space-10) 0 var(--space-8);
   }
 
   .home__title {
     font-size: 2.5rem;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
 
   .home__tagline {
     color: var(--color-text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .home__author {
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
+    font-size: 1rem;
+    margin-top: var(--space-3);
+    max-width: 28ch;
+    line-height: 1.6;
   }
 
   .home__recent {
-    margin-top: 1rem;
+    border-top: 1px solid var(--color-separator);
+    padding-top: var(--space-6);
+  }
+
+  .home__section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-4);
   }
 
   .home__all {
     display: inline-block;
-    margin-top: 1.5rem;
-    font-size: 0.85rem;
-    color: var(--color-accent);
+    margin-top: var(--space-5);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
     text-decoration: none;
+    transition: color var(--transition-fast);
   }
 
   .home__all:hover {
-    color: var(--color-accent-hover);
+    color: var(--color-accent);
   }
 
   @media (max-width: 768px) {
     .home__hero {
-      padding: 2rem 0;
+      padding: var(--space-8) 0 var(--space-6);
     }
 
     .home__title {
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
   }
 </style>

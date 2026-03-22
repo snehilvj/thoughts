@@ -20,9 +20,12 @@ const { tag, posts } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={`Posts tagged "${tag}"`} description={`All posts tagged with "${tag}".`}>
+<BaseLayout title={`${tag}`} description={`Posts tagged "${tag}".`}>
   <div class="tag-page container">
-    <p class="prompt">grep "{tag}" posts/ <span class="tag-page__count">{posts.length} result{posts.length !== 1 ? 's' : ''}</span></p>
+    <div class="tag-page__header">
+      <h1 class="tag-page__title">{tag}</h1>
+      <span class="tag-page__count">{posts.length} post{posts.length !== 1 ? 's' : ''}</span>
+    </div>
 
     <div class="tag-page__posts">
       {posts.map((post: any) => (
@@ -37,28 +40,41 @@ const base = import.meta.env.BASE_URL;
       ))}
     </div>
 
-    <a href={`${base}tags`} class="tag-page__back">&larr; cd ../tags/</a>
+    <a href={`${base}tags`} class="tag-page__back">&larr; tags</a>
   </div>
 </BaseLayout>
 
 <style>
   .tag-page {
-    padding: 3rem 1.5rem 4rem;
+    padding: var(--space-8) var(--space-5) var(--space-10);
+  }
+
+  .tag-page__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .tag-page__title {
+    font-size: 1.5rem;
   }
 
   .tag-page__count {
+    font-size: 0.8rem;
     color: var(--color-text-muted);
-    margin-left: 1rem;
-  }
-
-  .tag-page__posts {
-    margin-top: 1.5rem;
   }
 
   .tag-page__back {
     display: inline-block;
-    margin-top: 2rem;
-    font-size: 0.85rem;
+    margin-top: var(--space-6);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .tag-page__back:hover {
     color: var(--color-accent);
   }
 </style>

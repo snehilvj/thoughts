@@ -6,30 +6,47 @@ const base = import.meta.env.BASE_URL;
 
 <footer class="footer">
   <div class="container container--wide">
-    <p class="footer__text">
-      &copy; {year} {SITE.author} · <a href={SITE.social.github} target="_blank" rel="noopener noreferrer">github</a> · <a href={`${base}rss.xml`}>rss</a>
-    </p>
+    <div class="footer__inner">
+      <span class="footer__copy">&copy; {year} {SITE.author}</span>
+      <div class="footer__links">
+        <a href={SITE.social.github} target="_blank" rel="noopener noreferrer">github</a>
+        <a href={`${base}rss.xml`}>rss</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    margin-top: 4rem;
-    padding: 1.5rem 0;
-    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-12);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--color-separator);
   }
 
-  .footer__text {
-    font-size: 0.8rem;
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer__copy {
+    font-size: 0.75rem;
     color: var(--color-text-muted);
   }
 
-  .footer__text a {
+  .footer__links {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .footer__links a {
+    font-size: 0.75rem;
     color: var(--color-text-muted);
     text-decoration: none;
+    transition: color var(--transition-fast);
   }
 
-  .footer__text a:hover {
+  .footer__links a:hover {
     color: var(--color-accent);
   }
 </style>
