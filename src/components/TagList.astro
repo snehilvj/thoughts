@@ -1,0 +1,42 @@
+---
+interface Props {
+  tags: string[];
+  linked?: boolean;
+}
+
+const { tags, linked = true } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const tagCategories: Record<string, string> = {
+  tech: 'tech', webdev: 'tech', astro: 'tech', javascript: 'tech', typescript: 'tech', python: 'tech',
+  opinions: 'opinions', meta: 'opinions',
+  personal: 'life', travel: 'life', food: 'life', life: 'life',
+  startup: 'startup', business: 'startup', entrepreneurship: 'startup',
+};
+
+function getCategory(tag: string): string {
+  return tagCategories[tag.toLowerCase()] || '';
+}
+---
+
+<div class="tag-list">
+  {tags.map((tag) =>
+    linked ? (
+      <a href={`${base}tags/${tag}`} class="tag" data-category={getCategory(tag)}>
+        {tag}
+      </a>
+    ) : (
+      <span class="tag" data-category={getCategory(tag)}>
+        {tag}
+      </span>
+    )
+  )}
+</div>
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+</style>

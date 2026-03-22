@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getSortedPosts, getAllTags } from '../../utils/posts';
+
+const posts = await getSortedPosts();
+const allTags = await getAllTags();
+const tagList = Array.from(allTags.keys()).sort();
+---
+
+<BaseLayout title="Blog" description="All posts — tech, opinions, startup life, and more.">
+  <div class="blog-listing container">
+    <h1 class="blog-listing__title">All thoughts</h1>
+
+    {tagList.length > 0 && (
+      <div class="blog-listing__tags" id="tag-filter">
+        <button class="tag-filter-btn active" data-tag="all">all</button>
+        {tagList.map((tag) => (
+          <button class="tag-filter-btn" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
+    )}
+
+    <div class="blog-listing__posts" id="posts-list">
+      {posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          tags={post.data.tags}
+          slug={post.id}
+          body={post.body || ''}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll('.tag-filter-btn');
+  const posts = document.querySelectorAll('.post-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tag = (btn as HTMLElement).dataset.tag;
+
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      posts.forEach((post) => {
+        const postTags = (post as HTMLElement).dataset.tags?.split(',') || [];
+        if (tag === 'all' || postTags.includes(tag!)) {
+          (post as HTMLElement).style.display = '';
+        } else {
+          (post as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .blog-listing {
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .blog-listing__title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .blog-listing__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .tag-filter-btn {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .tag-filter-btn:hover,
+  .tag-filter-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+</style>

@@ -1,0 +1,131 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { SITE } from '../config';
+
+const pathname = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="header">
+  <nav class="header__nav container container--wide">
+    <a href={base} class="header__logo">
+      <span class="header__logo-text">{SITE.title}</span>
+    </a>
+
+    <div class="header__links">
+      <a href={base} class:list={['header__link', { active: pathname === base || pathname === base.slice(0, -1) }]}>Home</a>
+      <a href={`${base}blog`} class:list={['header__link', { active: pathname.startsWith(`${base}blog`) }]}>Blog</a>
+      <a href={`${base}about`} class:list={['header__link', { active: pathname.startsWith(`${base}about`) }]}>About</a>
+    </div>
+
+    <div class="header__actions">
+      <button class="header__search-btn" aria-label="Search" title="Search (Ctrl+K)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border-subtle);
+    transition: background var(--transition-base), border-color var(--transition-base);
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .header__logo {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .header__logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: -0.03em;
+  }
+
+  .header__links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .header__link {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    position: relative;
+  }
+
+  .header__link:hover,
+  .header__link.active {
+    color: var(--color-text);
+  }
+
+  .header__link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .header__search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .header__search-btn:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .header__links {
+      gap: 1.25rem;
+    }
+
+    .header__logo-text {
+      font-size: 1.1rem;
+    }
+  }
+</style>
