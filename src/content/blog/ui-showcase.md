@@ -4,6 +4,13 @@ description: "A comprehensive demo of all typography, code blocks, markdown feat
 pubDate: 2026-03-21
 tags: ["tech", "meta", "webdev"]
 draft: false
+sources:
+  - title: "Astro Documentation"
+    url: "https://docs.astro.build"
+  - title: "Shiki Syntax Highlighter"
+    url: "https://shiki.style"
+  - title: "Mermaid Diagram Syntax"
+    url: "https://mermaid.js.org/intro/"
 ---
 
 This post exists to showcase every visual element the blog supports. Think of it as a living style guide  - if something looks off here, it needs fixing.

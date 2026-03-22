@@ -1,0 +1,89 @@
+---
+interface Source {
+  title: string;
+  url: string;
+}
+
+interface Props {
+  sources: Source[];
+}
+
+const { sources } = Astro.props;
+---
+
+{sources.length > 0 && (
+  <aside class="sources">
+    <h3 class="sources__title">Sources</h3>
+    <ol class="sources__list">
+      {sources.map((source) => (
+        <li class="sources__item">
+          <a href={source.url} target="_blank" rel="noopener noreferrer" class="sources__link">
+            {source.title}
+            <span class="sources__url">{new URL(source.url).hostname}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </aside>
+)}
+
+<style>
+  .sources {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-separator);
+  }
+
+  .sources__title {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+  }
+
+  .sources__list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    counter-reset: source;
+  }
+
+  .sources__item {
+    counter-increment: source;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .sources__item::before {
+    content: counter(source) ".";
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+
+  .sources__link {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .sources__link:hover {
+    color: var(--color-accent-hover);
+    border-bottom-color: var(--color-accent-hover);
+  }
+
+  .sources__url {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+</style>

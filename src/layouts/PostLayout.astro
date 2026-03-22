@@ -2,8 +2,14 @@
 import BaseLayout from './BaseLayout.astro';
 import TagList from '../components/TagList.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
+import Sources from '../components/Sources.astro';
 import { getReadingTime } from '../utils/readingTime';
 import { SITE } from '../config';
+
+interface Source {
+  title: string;
+  url: string;
+}
 
 interface Props {
   title: string;
@@ -15,9 +21,10 @@ interface Props {
   heroAlt?: string;
   body: string;
   slug: string;
+  sources?: Source[];
 }
 
-const { title, description, pubDate, updatedDate, tags = [], heroImage, heroAlt, body, slug } = Astro.props;
+const { title, description, pubDate, updatedDate, tags = [], heroImage, heroAlt, body, slug, sources = [] } = Astro.props;
 const readingTime = getReadingTime(body);
 const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href;
 const dateStr = pubDate.toISOString().split('T')[0];
@@ -54,6 +61,8 @@ const dateStr = pubDate.toISOString().split('T')[0];
     <div class="prose">
       <slot />
     </div>
+
+    {sources.length > 0 && <Sources sources={sources} />}
 
     {updatedDate && (
       <p class="post__updated">

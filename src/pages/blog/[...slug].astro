@@ -24,6 +24,7 @@ const { Content } = await render(post);
   heroAlt={post.data.heroAlt}
   body={post.body || ''}
   slug={post.id}
+  sources={post.data.sources}
 >
   <Content />
 </PostLayout>

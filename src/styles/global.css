@@ -197,6 +197,12 @@ main {
   background-color: transparent !important;
 }
 
+/* Light theme: stronger code block styling */
+[data-theme='light'] .prose pre {
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.03);
+}
+
 /* --- Prose --- */
 .prose {
   line-height: 1.8;
@@ -372,6 +378,11 @@ main {
 .prose img {
   border-radius: var(--radius-md);
   margin: 2em auto;
+  box-shadow: 0 8px 40px rgba(226, 160, 82, 0.15), 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='light'] .prose img {
+  box-shadow: 0 8px 40px rgba(184, 125, 48, 0.12), 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Broken image fallback */
@@ -411,6 +422,12 @@ pre.mermaid[data-processed] {
 pre.mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+/* Light theme: stronger mermaid block styling */
+[data-theme='light'] pre.mermaid {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
 /* --- Tags --- */
@@ -473,4 +490,7 @@ pre.mermaid svg {
     padding: 0 var(--space-4);
   }
 
+  body {
+    background-attachment: scroll;
+  }
 }
