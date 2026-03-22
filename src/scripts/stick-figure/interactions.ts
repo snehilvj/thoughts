@@ -6,11 +6,13 @@ export interface InteractionState {
   mouseX: number;
   mouseY: number;
   lastInteractionTime: number;
+  scrollVelocity: number;
   destroy(): void;
 }
 
 const IDLE_TIMEOUT = 30_000; // 30 seconds
-const LEAN_RANGE = 300; // pixels
+const LEAN_RANGE = 400; // pixels
+const DANCE_RESET_MS = 600; // keep dancing for this long after last keypress
 
 export function setupInteractions(
   canvas: HTMLCanvasElement,
@@ -18,15 +20,21 @@ export function setupInteractions(
   stateController: StateController,
   getCanvasRect: () => DOMRect,
 ): InteractionState {
+  let lastDanceKeyTime = 0;
+
   const state: InteractionState = {
     mouseX: 0,
     mouseY: 0,
     lastInteractionTime: Date.now(),
+    scrollVelocity: 0,
     destroy() {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('click', onClick);
+      document.removeEventListener('dblclick', onDblClick);
       document.removeEventListener('touchmove', onTouchMove);
       document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('scroll', onScroll);
     },
   };
 
@@ -37,6 +45,24 @@ export function setupInteractions(
     }
   }
 
+  // --- Hit test helper ---
+  function hitTestFigure(clientX: number, clientY: number): boolean {
+    const rect = getCanvasRect();
+    const cx = clientX - rect.left;
+    const cy = clientY - rect.top;
+
+    const dx = cx - skeleton.head.x;
+    const dy = cy - skeleton.head.y;
+    const headHit = Math.sqrt(dx * dx + dy * dy) < HEAD_RADIUS * 3.5;
+
+    const bdx = cx - skeleton.hip.x;
+    const bdy = cy - skeleton.hip.y;
+    const bodyHit = Math.abs(bdx) < 30 && bdy > -50 && bdy < 50;
+
+    return headHit || bodyHit;
+  }
+
+  // --- Mouse ---
   function onMouseMove(e: MouseEvent) {
     state.mouseX = e.clientX;
     state.mouseY = e.clientY;
@@ -45,27 +71,24 @@ export function setupInteractions(
 
   function onClick(e: MouseEvent) {
     resetIdleTimer();
-
-    // Check if click is on/near the figure
-    const rect = getCanvasRect();
-    const dpr = window.devicePixelRatio || 1;
-    const canvasX = (e.clientX - rect.left);
-    const canvasY = (e.clientY - rect.top);
-
-    // Hit test against the figure's head area (most clickable)
-    const dx = canvasX - skeleton.head.x;
-    const dy = canvasY - skeleton.head.y;
-    const bodyDy = canvasY - skeleton.hip.y;
-    const bodyDx = canvasX - skeleton.hip.x;
-
-    const headHit = Math.sqrt(dx * dx + dy * dy) < HEAD_RADIUS * 3;
-    const bodyHit = Math.abs(bodyDx) < 20 && bodyDy > -40 && bodyDy < 40;
-
-    if ((headHit || bodyHit) && stateController.current !== 'waving') {
-      stateController.transition('waving');
+    if (hitTestFigure(e.clientX, e.clientY)) {
+      if (stateController.current !== 'waving' && stateController.current !== 'jumping') {
+        stateController.transition('waving');
+      }
+    } else {
+      // Click elsewhere — brief head turn toward click
+      // (handled via mouse position already tracking)
     }
   }
 
+  function onDblClick(e: MouseEvent) {
+    resetIdleTimer();
+    if (hitTestFigure(e.clientX, e.clientY)) {
+      stateController.transition('jumping');
+    }
+  }
+
+  // --- Touch ---
   function onTouchMove(e: TouchEvent) {
     const touch = e.touches[0];
     if (!touch) return;
@@ -74,6 +97,7 @@ export function setupInteractions(
     resetIdleTimer();
   }
 
+  let lastTapTime = 0;
   function onTouchStart(e: TouchEvent) {
     const touch = e.touches[0];
     if (!touch) return;
@@ -81,38 +105,97 @@ export function setupInteractions(
     state.mouseY = touch.clientY;
     resetIdleTimer();
 
-    // Hit test for tap on figure
-    const rect = getCanvasRect();
-    const canvasX = touch.clientX - rect.left;
-    const canvasY = touch.clientY - rect.top;
-
-    const dx = canvasX - skeleton.head.x;
-    const dy = canvasY - skeleton.head.y;
-    const bodyDx = canvasX - skeleton.hip.x;
-    const bodyDy = canvasY - skeleton.hip.y;
-
-    const headHit = Math.sqrt(dx * dx + dy * dy) < HEAD_RADIUS * 3;
-    const bodyHit = Math.abs(bodyDx) < 20 && bodyDy > -40 && bodyDy < 40;
-
-    if ((headHit || bodyHit) && stateController.current !== 'waving') {
-      stateController.transition('waving');
+    if (hitTestFigure(touch.clientX, touch.clientY)) {
+      const now = Date.now();
+      if (now - lastTapTime < 350) {
+        // Double tap
+        stateController.transition('jumping');
+      } else {
+        if (stateController.current !== 'waving' && stateController.current !== 'jumping') {
+          stateController.transition('waving');
+        }
+      }
+      lastTapTime = now;
     }
   }
 
+  // --- Keyboard ---
+  function onKeyDown(e: KeyboardEvent) {
+    resetIdleTimer();
+
+    if (e.key === 'Escape') {
+      stateController.transition('sitting');
+      return;
+    }
+
+    if (e.key === ' ' && !isTypingInInput(e)) {
+      stateController.transition('jumping');
+      return;
+    }
+
+    if (e.key.startsWith('Arrow')) {
+      // Small lean in arrow direction
+      if (e.key === 'ArrowLeft') skeleton.targetLeanAngle = -0.15;
+      else if (e.key === 'ArrowRight') skeleton.targetLeanAngle = 0.15;
+      return;
+    }
+
+    // Printable keys -> dance
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
+      lastDanceKeyTime = Date.now();
+      if (stateController.current !== 'dancing') {
+        stateController.transition('dancing');
+      } else {
+        // Reset dance timer so it keeps going
+        stateController.stateTime = Math.min(stateController.stateTime, 1);
+      }
+    }
+  }
+
+  // --- Scroll ---
+  let lastScrollY = window.scrollY;
+  let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  function onScroll() {
+    resetIdleTimer();
+    const dy = window.scrollY - lastScrollY;
+    state.scrollVelocity = dy;
+    lastScrollY = window.scrollY;
+
+    // Fast scroll -> surprised
+    if (Math.abs(dy) > 80 && stateController.current === 'idle') {
+      stateController.transition('surprised');
+    }
+
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      state.scrollVelocity = 0;
+    }, 150);
+  }
+
+  // --- Register ---
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('click', onClick);
+  document.addEventListener('dblclick', onDblClick);
   document.addEventListener('touchmove', onTouchMove, { passive: true });
   document.addEventListener('touchstart', onTouchStart, { passive: true });
+  document.addEventListener('keydown', onKeyDown);
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   return state;
 }
 
-export function updateFromMouse(
+function isTypingInInput(e: KeyboardEvent): boolean {
+  const tag = (e.target as HTMLElement)?.tagName;
+  return tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable === true;
+}
+
+export function updateFromPointer(
   skeleton: Skeleton,
   interaction: InteractionState,
   canvasRect: DOMRect,
 ): void {
-  // Eye tracking: compute direction from head to mouse
+  // Eye tracking
   const headScreenX = canvasRect.left + skeleton.head.x;
   const headScreenY = canvasRect.top + skeleton.head.y;
   const dx = interaction.mouseX - headScreenX;
@@ -124,17 +207,22 @@ export function updateFromMouse(
     skeleton.pupilOffsetY = dy / dist;
   }
 
-  // Body lean toward cursor when close
+  // Body lean toward pointer when close
   const hipScreenX = canvasRect.left + skeleton.hip.x;
-  const hipScreenY = canvasRect.top + skeleton.hip.y;
   const hipDx = interaction.mouseX - hipScreenX;
   const hipDist = Math.abs(hipDx);
 
   if (hipDist < LEAN_RANGE) {
-    const leanStrength = (1 - hipDist / LEAN_RANGE) * 0.12;
-    skeleton.targetLeanAngle = hipDx > 0 ? leanStrength : -leanStrength;
+    const strength = (1 - hipDist / LEAN_RANGE) * 0.1;
+    skeleton.targetLeanAngle = hipDx > 0 ? strength : -strength;
   } else {
     skeleton.targetLeanAngle = 0;
+  }
+
+  // Scroll lean
+  if (Math.abs(interaction.scrollVelocity) > 5) {
+    const scrollLean = Math.sign(interaction.scrollVelocity) * Math.min(Math.abs(interaction.scrollVelocity) * 0.002, 0.08);
+    skeleton.targetLeanAngle += scrollLean;
   }
 }
 
