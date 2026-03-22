@@ -1,20 +1,26 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
-import { SITE } from '../config';
 
-const pathname = Astro.url.pathname;
+interface Props {
+  path?: string;
+}
+
+const { path = '~' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
 ---
 
 <header class="header">
   <nav class="header__nav container container--wide">
-    <a href={base} class="header__logo">
-      <span class="header__logo-text">{SITE.title}</span>
-    </a>
+    <div class="header__left">
+      <a href={base} class="header__path">{path}</a>
+      <span class="header__prompt">$</span>
+    </div>
 
     <div class="header__links">
-      <a href={`${base}blog`} class:list={['header__link', { active: pathname.startsWith(`${base}blog`) }]}>Blog</a>
-      <a href={`${base}about`} class:list={['header__link', { active: pathname.startsWith(`${base}about`) }]}>About</a>
+      <a href={`${base}blog`} class:list={['header__link', { active: pathname.startsWith(`${base}blog`) }]}>[blog]</a>
+      <a href={`${base}about`} class:list={['header__link', { active: pathname.startsWith(`${base}about`) }]}>[about]</a>
+      <a href={`${base}rss.xml`} class="header__link">[rss]</a>
     </div>
 
     <div class="header__actions">
@@ -25,81 +31,81 @@ const base = import.meta.env.BASE_URL;
 
 <style>
   .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    height: var(--header-height);
-    display: flex;
-    align-items: center;
-    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border-subtle);
-    transition: background var(--transition-base), border-color var(--transition-base);
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .header__nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    gap: 1.5rem;
   }
 
-  .header__logo {
-    text-decoration: none;
+  .header__left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .header__path {
     color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.85rem;
   }
 
-  .header__logo-text {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-style: italic;
-    letter-spacing: -0.03em;
+  .header__path:hover {
+    color: var(--color-accent);
+  }
+
+  .header__prompt {
+    color: var(--color-accent);
+    font-size: 0.85rem;
   }
 
   .header__links {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .header__link {
     font-size: 0.85rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     text-decoration: none;
     transition: color var(--transition-fast);
-    position: relative;
   }
 
   .header__link:hover,
   .header__link.active {
-    color: var(--color-text);
-  }
-
-  .header__link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-accent);
-    border-radius: 1px;
+    color: var(--color-accent);
   }
 
   .header__actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-shrink: 0;
   }
 
   @media (max-width: 768px) {
     .header__links {
-      gap: 1.25rem;
+      gap: 0.75rem;
     }
 
-    .header__logo-text {
-      font-size: 1.1rem;
+    .header__path,
+    .header__prompt,
+    .header__link {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header__nav {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .header__links {
+      order: 3;
+      width: 100%;
     }
   }
 </style>
