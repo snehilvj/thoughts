@@ -37,7 +37,7 @@ The built-in Shiki integration means code blocks look good without any extra dep
 
 ## The terminal aesthetic
 
-Most blogs look the same — serif headings, sans-serif body, card layouts, hero images. I wanted something different. The entire site is set in JetBrains Mono. Navigation uses file-path prompts (`~/thoughts $`). Posts are listed like log entries. Tags use `[brackets]` instead of colored pills.
+Most blogs look the same — serif headings, sans-serif body, card layouts, hero images. I wanted something different. The entire site is set in JetBrains Mono. Every element earns its place — no decoration for decoration's sake. The warm amber accent and subtle dot grid background give it a contemplative feel, like graph paper for thinking.
 
 It's not for everyone, but it's *mine*. And it loads fast.
 
