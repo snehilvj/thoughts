@@ -370,6 +370,16 @@ main {
   margin: 2em auto;
 }
 
+/* Broken image fallback */
+.prose img[alt]::after {
+  content: attr(alt);
+  display: block;
+  padding: var(--space-4);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
 /* --- Mermaid diagrams --- */
 pre.mermaid {
   background: var(--color-bg-elevated) !important;
