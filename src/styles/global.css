@@ -443,27 +443,43 @@ pre.mermaid svg {
   color: var(--color-text) !important;
 }
 
+/* Flowchart edges and arrows */
 [data-theme='light'] pre.mermaid .edgePath .path,
 [data-theme='light'] pre.mermaid .flowchart-link {
   stroke: var(--color-text-secondary) !important;
 }
 
 [data-theme='light'] pre.mermaid .edgeLabel {
-  background-color: var(--color-bg) !important;
+  background-color: var(--color-bg-elevated) !important;
   color: var(--color-text) !important;
 }
 
 [data-theme='light'] pre.mermaid .edgeLabel rect {
-  fill: var(--color-bg) !important;
+  fill: var(--color-bg-elevated) !important;
   opacity: 1 !important;
 }
 
-[data-theme='light'] pre.mermaid .marker {
+[data-theme='light'] pre.mermaid .edgeLabel span {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid .edgeLabel foreignObject {
+  overflow: visible !important;
+}
+
+[data-theme='light'] pre.mermaid .edgeLabel foreignObject div {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme='light'] pre.mermaid .marker,
+[data-theme='light'] pre.mermaid marker path {
   fill: var(--color-text-secondary) !important;
   stroke: var(--color-text-secondary) !important;
 }
 
-/* Light: sequence diagram */
+/* Light: sequence diagram actors */
 [data-theme='light'] pre.mermaid .actor {
   fill: var(--color-bg-elevated) !important;
   stroke: var(--color-accent) !important;
@@ -473,17 +489,31 @@ pre.mermaid svg {
   fill: var(--color-text) !important;
 }
 
+/* Light: sequence diagram lines and arrows */
 [data-theme='light'] pre.mermaid .messageLine0,
 [data-theme='light'] pre.mermaid .messageLine1 {
-  stroke: var(--color-text-secondary) !important;
+  stroke: var(--color-text) !important;
+  stroke-width: 1.5 !important;
 }
 
 [data-theme='light'] pre.mermaid .messageText {
   fill: var(--color-text) !important;
 }
 
+[data-theme='light'] pre.mermaid #arrowhead path,
+[data-theme='light'] pre.mermaid #crosshead path,
+[data-theme='light'] pre.mermaid #sequencenumber {
+  fill: var(--color-text) !important;
+  stroke: var(--color-text) !important;
+}
+
 [data-theme='light'] pre.mermaid .loopLine {
   stroke: var(--color-text-muted) !important;
+}
+
+[data-theme='light'] pre.mermaid .loopText,
+[data-theme='light'] pre.mermaid .loopText > tspan {
+  fill: var(--color-text) !important;
 }
 
 [data-theme='light'] pre.mermaid .note {
@@ -495,8 +525,22 @@ pre.mermaid svg {
   fill: var(--color-text) !important;
 }
 
+/* Sequence lifelines and generic lines */
+[data-theme='light'] pre.mermaid line[class*="actor"],
+[data-theme='light'] pre.mermaid .actor-line {
+  stroke: var(--color-text-secondary) !important;
+}
+
 [data-theme='light'] pre.mermaid line {
-  stroke: var(--color-text-muted) !important;
+  stroke: var(--color-text-secondary) !important;
+}
+
+/* Activation boxes in sequence diagrams */
+[data-theme='light'] pre.mermaid .activation0,
+[data-theme='light'] pre.mermaid .activation1,
+[data-theme='light'] pre.mermaid .activation2 {
+  fill: var(--color-bg-elevated) !important;
+  stroke: var(--color-accent) !important;
 }
 
 /* --- Tags --- */
