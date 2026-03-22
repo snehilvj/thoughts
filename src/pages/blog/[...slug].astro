@@ -23,6 +23,7 @@ const { Content } = await render(post);
   heroImage={post.data.heroImage}
   heroAlt={post.data.heroAlt}
   body={post.body || ''}
+  slug={post.id}
 >
   <Content />
 </PostLayout>

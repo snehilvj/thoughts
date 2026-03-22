@@ -20,7 +20,8 @@ const {
 
 const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
 const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href;
-const ogImage = image ? new URL(image, SITE.url).href : undefined;
+const defaultOgImage = `${import.meta.env.BASE_URL}images/og-default.svg`;
+const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, SITE.url).href;
 ---
 
 <!doctype html>
@@ -40,7 +41,7 @@ const ogImage = image ? new URL(image, SITE.url).href : undefined;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={ogImage} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

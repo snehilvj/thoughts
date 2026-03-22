@@ -35,7 +35,13 @@
     transition: color var(--transition-fast);
   }
 
-  .theme-toggle:hover {
+  @media (hover: hover) {
+    .theme-toggle:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .theme-toggle:active {
     color: var(--color-text);
   }
 </style>

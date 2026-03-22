@@ -48,8 +48,10 @@ const pathname = Astro.url.pathname;
     transition: color var(--transition-fast);
   }
 
-  .header__brand:hover {
-    color: var(--color-accent-hover);
+  @media (hover: hover) {
+    .header__brand:hover {
+      color: var(--color-accent-hover);
+    }
   }
 
   .header__right {
@@ -65,8 +67,10 @@ const pathname = Astro.url.pathname;
     transition: color var(--transition-fast);
   }
 
-  .header__link:hover {
-    color: var(--color-text);
+  @media (hover: hover) {
+    .header__link:hover {
+      color: var(--color-text);
+    }
   }
 
   .header__link.active {
