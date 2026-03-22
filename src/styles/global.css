@@ -432,13 +432,13 @@ pre.mermaid svg {
 [data-theme='light'] pre.mermaid .node rect,
 [data-theme='light'] pre.mermaid .node circle,
 [data-theme='light'] pre.mermaid .node polygon {
-  fill: #ECECFF !important;
-  stroke: #9370DB !important;
+  fill: var(--color-bg-elevated) !important;
+  stroke: var(--color-border-strong) !important;
 }
 
 [data-theme='light'] pre.mermaid .nodeLabel,
 [data-theme='light'] pre.mermaid .edgeLabel {
-  color: #333 !important;
+  color: var(--color-text) !important;
 }
 
 [data-theme='light'] pre.mermaid .edgeLabel rect {
