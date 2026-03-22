@@ -1,0 +1,356 @@
+/* ============================================
+   Garden - Origami Sakura Ecosystem
+   ============================================ */
+
+/* --- Garden Theme Variables --- */
+:root {
+  --garden-sky: #0a0e1a;
+  --garden-sky-gradient: #0d1425;
+  --garden-ground: #1a1612;
+  --garden-ground-accent: #2a2218;
+  --garden-trunk: #5c4033;
+  --garden-trunk-fold: #3d2a21;
+  --garden-trunk-highlight: #7a5a48;
+  --garden-leaf: #4a7c59;
+  --garden-leaf-fold: #2d5a3a;
+  --garden-blossom: #f4a0b0;
+  --garden-blossom-fold: #d4808f;
+  --garden-blossom-center: #ffd700;
+  --garden-petal: #fce4ec;
+  --garden-petal-fold: #f0c0cc;
+  --garden-seed: #8b6914;
+  --garden-seed-fold: #6b4f10;
+  --garden-bird: #6899b8;
+  --garden-bird-fold: #4a7a98;
+  --garden-squirrel: #b07840;
+  --garden-squirrel-fold: #8a5c2e;
+  --garden-insect: #88a848;
+  --garden-insect-fold: #688830;
+  --garden-nest: #8b7355;
+  --garden-nest-fold: #6b5540;
+  --garden-cloud: rgba(255, 255, 255, 0.06);
+  --garden-cloud-fold: rgba(255, 255, 255, 0.03);
+  --garden-rain: rgba(120, 160, 220, 0.5);
+  --garden-lightning: #fff8c4;
+  --garden-grass: #3a6648;
+  --garden-grass-fold: #2a4a35;
+  --garden-paper-shadow: rgba(0, 0, 0, 0.3);
+  --garden-text: var(--color-text-secondary);
+}
+
+[data-theme='light'] {
+  --garden-sky: #dce8f4;
+  --garden-sky-gradient: #c8daea;
+  --garden-ground: #c8b898;
+  --garden-ground-accent: #b8a888;
+  --garden-trunk: #6b4e37;
+  --garden-trunk-fold: #8b6e57;
+  --garden-trunk-highlight: #a08068;
+  --garden-leaf: #5a9c69;
+  --garden-leaf-fold: #3d7a4a;
+  --garden-blossom: #e8869a;
+  --garden-blossom-fold: #c8667a;
+  --garden-blossom-center: #e8b800;
+  --garden-petal: #fce4ec;
+  --garden-petal-fold: #f0c0cc;
+  --garden-seed: #a08020;
+  --garden-seed-fold: #807018;
+  --garden-bird: #5080a8;
+  --garden-bird-fold: #3a6888;
+  --garden-squirrel: #a06830;
+  --garden-squirrel-fold: #804c1e;
+  --garden-insect: #78983a;
+  --garden-insect-fold: #587828;
+  --garden-nest: #7b6345;
+  --garden-nest-fold: #5b4530;
+  --garden-cloud: rgba(255, 255, 255, 0.6);
+  --garden-cloud-fold: rgba(255, 255, 255, 0.35);
+  --garden-rain: rgba(80, 120, 180, 0.4);
+  --garden-lightning: #fffde0;
+  --garden-grass: #4a8058;
+  --garden-grass-fold: #3a6048;
+  --garden-paper-shadow: rgba(0, 0, 0, 0.1);
+  --garden-text: var(--color-text-secondary);
+}
+
+/* --- Garden Layout --- */
+.garden {
+  padding: var(--space-4) var(--space-5) var(--space-8);
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.garden__scene {
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.garden__scene--visible {
+  opacity: 1;
+}
+
+.garden__scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --- Stats Bar --- */
+.garden__stats {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--garden-text);
+  opacity: 0;
+  transition: opacity 0.5s ease-out 0.3s;
+}
+
+.garden__stats--visible {
+  opacity: 1;
+}
+
+.garden__stats span {
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+/* --- Loader --- */
+.garden-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  z-index: 10;
+  transition: opacity 0.4s ease-out;
+}
+
+.garden-loader--done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.garden-loader__icon {
+  width: 60px;
+  height: 60px;
+}
+
+.garden-loader__fold {
+  fill: var(--color-accent);
+  transform-origin: center 70%;
+  animation: loader-fold 1.5s ease-in-out infinite;
+}
+
+.garden-loader__text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+}
+
+@keyframes loader-fold {
+  0%, 100% { transform: scaleY(1) rotateX(0deg); opacity: 0.8; }
+  25% { transform: scaleY(0.6) rotateX(20deg); opacity: 1; }
+  50% { transform: scaleY(1) rotateX(0deg); opacity: 0.8; }
+  75% { transform: scaleY(0.8) rotateX(-15deg); opacity: 1; }
+}
+
+/* --- SVG Element Animations --- */
+
+/* Branch unfold on page load */
+.branch-group {
+  transform-origin: bottom center;
+  animation: unfold 0.6s ease-out both;
+}
+
+@keyframes unfold {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+/* Leaf sway - applied via JS transform, this is the hover enhancement */
+.leaf-group {
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+
+.leaf-group:hover {
+  filter: brightness(1.15);
+}
+
+/* Blossom pulse */
+.blossom-group {
+  cursor: pointer;
+}
+
+.blossom-group:hover {
+  filter: brightness(1.2);
+}
+
+/* Shake animation for branches */
+.shake {
+  animation: paper-shake 0.6s ease-out !important;
+}
+
+@keyframes paper-shake {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(3deg); }
+  30% { transform: rotate(-2.5deg); }
+  45% { transform: rotate(2deg); }
+  60% { transform: rotate(-1deg); }
+  75% { transform: rotate(0.5deg); }
+}
+
+/* Bird flight */
+.creature-bird {
+  cursor: pointer;
+  transition: transform var(--transition-base);
+}
+
+.creature-bird:hover {
+  transform: translateY(-3px);
+}
+
+.bird-flee {
+  transition: none !important;
+  animation: bird-fly-away 1.2s ease-in forwards;
+}
+
+@keyframes bird-fly-away {
+  0% { opacity: 1; }
+  100% { transform: translate(-200px, -150px) rotate(-20deg); opacity: 0; }
+}
+
+.bird-return {
+  animation: bird-fly-in 1s ease-out forwards;
+}
+
+@keyframes bird-fly-in {
+  0% { transform: translate(200px, -100px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+
+/* Creature hover - paper unfold */
+.creature-group {
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.creature-group:hover {
+  transform: scale(1.08);
+}
+
+/* Cloud drift */
+.cloud-group {
+  animation: cloud-drift linear infinite;
+}
+
+@keyframes cloud-drift {
+  from { transform: translateX(-100px); }
+  to { transform: translateX(900px); }
+}
+
+/* Rain */
+.rain-drop {
+  animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+  from { transform: translateY(-20px); opacity: 0.7; }
+  to { transform: translateY(600px); opacity: 0; }
+}
+
+/* Lightning flash */
+.lightning {
+  animation: lightning-flash 0.3s ease-out forwards;
+}
+
+@keyframes lightning-flash {
+  0% { opacity: 1; }
+  20% { opacity: 0; }
+  40% { opacity: 0.8; }
+  60% { opacity: 0; }
+  80% { opacity: 0.4; }
+  100% { opacity: 0; }
+}
+
+/* Wind gust - applied temporarily to all leaves */
+.wind-gust .leaf-group {
+  animation: wind-sway 0.8s ease-in-out;
+}
+
+@keyframes wind-sway {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(8deg) translateX(3px); }
+  50% { transform: rotate(-4deg) translateX(-1px); }
+  75% { transform: rotate(3deg) translateX(1px); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Seed entrance */
+.seed-group {
+  animation: seed-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes seed-drop {
+  from { transform: translateY(-50px) rotate(30deg); opacity: 0; }
+  to { transform: translateY(0) rotate(0deg); opacity: 1; }
+}
+
+/* Petal fall - base, actual movement via JS */
+.petal-particle {
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Insect flutter */
+.creature-insect {
+  animation: insect-flutter 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes insect-flutter {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(-2px) rotate(3deg); }
+}
+
+/* Squirrel idle */
+.creature-squirrel {
+  cursor: pointer;
+}
+
+.creature-squirrel:hover {
+  animation: squirrel-twitch 0.4s ease-out;
+}
+
+@keyframes squirrel-twitch {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-5deg) translateY(-2px); }
+  60% { transform: rotate(3deg); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .garden {
+    padding: var(--space-2) var(--space-3) var(--space-6);
+  }
+
+  .garden__stats {
+    font-size: 0.65rem;
+    gap: var(--space-2);
+  }
+}
