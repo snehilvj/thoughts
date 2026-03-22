@@ -18,7 +18,7 @@ const {
   type = 'website',
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
+const pageTitle = title ? `${title}  - ${SITE.title}` : SITE.title;
 const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href;
 const defaultOgImage = `${import.meta.env.BASE_URL}images/og-default.svg`;
 const ogImage = image ? new URL(image, SITE.url).href : new URL(defaultOgImage, SITE.url).href;

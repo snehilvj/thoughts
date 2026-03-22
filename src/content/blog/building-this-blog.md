@@ -1,6 +1,6 @@
 ---
 title: "How I Built This Blog"
-description: "A technical walkthrough of building a terminal-inspired personal blog with Astro and vanilla CSS — no frameworks, no fuss."
+description: "A technical walkthrough of building a terminal-inspired personal blog with Astro and vanilla CSS  - no frameworks, no fuss."
 pubDate: 2026-03-22
 tags: ["tech", "webdev", "astro"]
 ---
@@ -10,11 +10,11 @@ I spent way too long thinking about how to build this blog. The irony of enginee
 ## The stack
 
 - **Astro** for static site generation
-- **JetBrains Mono** — monospace everything
+- **JetBrains Mono**  - monospace everything
 - **Vanilla CSS** with custom properties for theming
-- **Zero frontend frameworks** — no React, no Vue, no Svelte
+- **Zero frontend frameworks**  - no React, no Vue, no Svelte
 
-The whole thing ships almost zero JavaScript to the browser. Just a theme toggle. The terminal-inspired aesthetic means no fancy graphics, no animations — just text on a dark background, the way a blog should be.
+The whole thing ships almost zero JavaScript to the browser. Just a theme toggle. The terminal-inspired aesthetic means no fancy graphics, no animations  - just text on a dark background, the way a blog should be.
 
 ## Why Astro?
 
@@ -37,7 +37,7 @@ The built-in Shiki integration means code blocks look good without any extra dep
 
 ## The terminal aesthetic
 
-Most blogs look the same — serif headings, sans-serif body, card layouts, hero images. I wanted something different. The entire site is set in JetBrains Mono. Every element earns its place — no decoration for decoration's sake. The warm amber accent and subtle dot grid background give it a contemplative feel, like graph paper for thinking.
+Most blogs look the same  - serif headings, sans-serif body, card layouts, hero images. I wanted something different. The entire site is set in JetBrains Mono. Every element earns its place  - no decoration for decoration's sake. The warm amber accent and subtle dot grid background give it a contemplative feel, like graph paper for thinking.
 
 It's not for everyone, but it's *mine*. And it loads fast.
 
@@ -54,7 +54,7 @@ The theme system uses CSS custom properties with a `data-theme` attribute on `<h
 </script>
 ```
 
-The `is:inline` directive is crucial — it prevents Astro from bundling the script, so it runs synchronously before the first paint.
+The `is:inline` directive is crucial  - it prevents Astro from bundling the script, so it runs synchronously before the first paint.
 
 ## What I'd do differently
 

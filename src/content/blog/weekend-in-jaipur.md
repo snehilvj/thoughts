@@ -9,15 +9,15 @@ heroAlt: "The ornate facade of Hawa Mahal in Jaipur at golden hour"
 
 I didn't plan this trip. A friend texted "Jaipur this weekend?" on a Wednesday night, and by Friday morning we were on a train watching Delhi's concrete give way to Rajasthan's ochre dust.
 
-That's usually how the best trips happen — no itinerary, no hotel booked, just a destination and a vague sense of optimism.
+That's usually how the best trips happen  - no itinerary, no hotel booked, just a destination and a vague sense of optimism.
 
 ## First impressions
 
-Jaipur hits you with color before anything else. The pink isn't subtle — it's everywhere. Entire streets painted in that signature terracotta-rose, fading and peeling in the most photogenic way possible.
+Jaipur hits you with color before anything else. The pink isn't subtle  - it's everywhere. Entire streets painted in that signature terracotta-rose, fading and peeling in the most photogenic way possible.
 
 ![The streets of Jaipur's old city, buildings painted in shades of pink and terracotta](https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?w=900&q=80)
 
-We found a guesthouse in the old city — nothing fancy, but it had a rooftop with a view of Nahargarh Fort. The owner brought us chai before we'd even put our bags down. That's Rajasthani hospitality for you.
+We found a guesthouse in the old city  - nothing fancy, but it had a rooftop with a view of Nahargarh Fort. The owner brought us chai before we'd even put our bags down. That's Rajasthani hospitality for you.
 
 ## The food
 
@@ -27,7 +27,7 @@ Let me be clear: I went for the architecture and came back a different person be
 
 The dish that changed me. Baked wheat balls (baati) dipped in ghee, served with five different dals and a sweet crumbled mixture (churma). It sounds simple. It is not simple. Every family makes it differently, and every version I tried was better than the last.
 
-We found a small place near Johari Bazaar — no sign, just a guy with a tandoor and thirty years of practice. The baati had a crack that let the ghee seep all the way through. I ordered three rounds.
+We found a small place near Johari Bazaar  - no sign, just a guy with a tandoor and thirty years of practice. The baati had a crack that let the ghee seep all the way through. I ordered three rounds.
 
 ### Street food at the bazaar
 
@@ -36,13 +36,13 @@ We found a small place near Johari Bazaar — no sign, just a guy with a tandoor
 The pyaaz ki kachori (onion-stuffed fried bread) from the stalls near the City Palace is worth the trip alone. Crispy outside, spiced onion filling inside, served with a tamarind chutney that makes you close your eyes involuntarily.
 
 Other highlights:
-- **Mirchi vada** — battered and fried chili peppers stuffed with potato
-- **Kulfi faluda** — dense frozen milk dessert with vermicelli and rose syrup
-- **Lassi** from Lassiwala — thick, creamy, served in clay cups that you throw away after
+- **Mirchi vada**  - battered and fried chili peppers stuffed with potato
+- **Kulfi faluda**  - dense frozen milk dessert with vermicelli and rose syrup
+- **Lassi** from Lassiwala  - thick, creamy, served in clay cups that you throw away after
 
 ## The quiet moments
 
-The best part of travel isn't the monuments — it's the in-between.
+The best part of travel isn't the monuments  - it's the in-between.
 
 > We sat on the guesthouse rooftop at 6 AM, watching the city wake up. Pigeons everywhere, the distant sound of temple bells, chai that tasted better because of where we were sitting. Nobody said anything for twenty minutes. It was perfect.
 
@@ -52,10 +52,10 @@ I've noticed that the cities I love most are the ones where you can find silence
 
 Every trip teaches you something, even the short ones. This one taught me:
 
-1. **Plan less** — the chai shop you stumble into will be better than the one you researched
-2. **Eat everything** — food anxiety is the enemy of experience
-3. **Talk to strangers** — the guesthouse owner told us about a sunset viewpoint that wasn't in any guide
-4. **Carry less** — I packed for a week. I needed two outfits and a phone charger
+1. **Plan less**  - the chai shop you stumble into will be better than the one you researched
+2. **Eat everything**  - food anxiety is the enemy of experience
+3. **Talk to strangers**  - the guesthouse owner told us about a sunset viewpoint that wasn't in any guide
+4. **Carry less**  - I packed for a week. I needed two outfits and a phone charger
 
 ## Would I go back?
 
@@ -65,4 +65,4 @@ Some cities you visit. Others you collect. Jaipur is a collector.
 
 ---
 
-*If you're planning a trip to Jaipur, go in October through February — the summers are brutal. And please, for the love of everything, try the kachori.*
+*If you're planning a trip to Jaipur, go in October through February  - the summers are brutal. And please, for the love of everything, try the kachori.*
