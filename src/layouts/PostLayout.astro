@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import TagList from '../components/TagList.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 import { getReadingTime } from '../utils/readingTime';
 import { SITE } from '../config';
 
@@ -13,9 +14,10 @@ interface Props {
   heroImage?: string;
   heroAlt?: string;
   body: string;
+  slug: string;
 }
 
-const { title, description, pubDate, updatedDate, tags = [], heroImage, heroAlt, body } = Astro.props;
+const { title, description, pubDate, updatedDate, tags = [], heroImage, heroAlt, body, slug } = Astro.props;
 const readingTime = getReadingTime(body);
 const canonicalUrl = new URL(Astro.url.pathname, SITE.url).href;
 const dateStr = pubDate.toISOString().split('T')[0];
@@ -58,6 +60,8 @@ const dateStr = pubDate.toISOString().split('T')[0];
         Updated {updatedDate.toISOString().split('T')[0]}
       </p>
     )}
+
+    <RelatedPosts currentSlug={slug} currentTags={tags} />
   </article>
 
   <script

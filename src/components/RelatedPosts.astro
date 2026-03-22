@@ -1,0 +1,100 @@
+---
+import { getSortedPosts } from '../utils/posts';
+
+interface Props {
+  currentSlug: string;
+  currentTags: string[];
+}
+
+const { currentSlug, currentTags } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const allPosts = await getSortedPosts();
+const otherPosts = allPosts.filter((p) => p.id !== currentSlug);
+
+// Score posts by shared tag count
+const scored = otherPosts.map((post) => {
+  const shared = post.data.tags.filter((t) => currentTags.includes(t)).length;
+  return { post, score: shared };
+});
+
+// Sort by relevance (shared tags), then by date
+scored.sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf());
+
+const related = scored.slice(0, 3);
+---
+
+{related.length > 0 && (
+  <aside class="related">
+    <h2 class="related__title">Keep reading</h2>
+    <div class="related__list">
+      {related.map(({ post }) => (
+        <a href={`${base}blog/${post.id}`} class="related__item">
+          <span class="related__post-title">{post.data.title}</span>
+          <span class="related__post-desc">{post.data.description}</span>
+          <span class="related__post-date">{post.data.pubDate.toISOString().split('T')[0]}</span>
+        </a>
+      ))}
+    </div>
+  </aside>
+)}
+
+<style>
+  .related {
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-separator);
+  }
+
+  .related__title {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-5);
+  }
+
+  .related__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .related__item {
+    display: block;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--transition-fast);
+  }
+
+  @media (hover: hover) {
+    .related__item:hover {
+      background: var(--color-bg-hover);
+    }
+  }
+
+  .related__post-title {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .related__post-desc {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-1);
+    line-height: 1.5;
+  }
+
+  .related__post-date {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+  }
+</style>

@@ -196,6 +196,35 @@ When you run `pnpm run dev`, the server starts on `http://localhost:4321`. The `
 | Shiki | Syntax highlighting | 0KB (build-time) | Built into Astro, dual-theme |
 | Vanilla CSS | Styling | ~8KB | Full control, no framework overhead |
 
+## Mermaid Diagrams
+
+The blog supports mermaid diagrams rendered client-side. They adapt to the current theme.
+
+### Flowchart
+
+```mermaid
+graph TD
+    A[Write Post] --> B{Build}
+    B -->|Success| C[Deploy]
+    B -->|Failure| D[Fix Errors]
+    D --> B
+    C --> E[Live on GitHub Pages]
+```
+
+### Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant CDN
+    participant Server
+    Browser->>CDN: Request page
+    CDN-->>Browser: HTML + CSS
+    Browser->>Browser: Render (no JS needed)
+    Browser->>CDN: Load theme preference
+    CDN-->>Browser: localStorage value
+```
+
 ## Horizontal Rules
 
 Content before the rule.
@@ -231,7 +260,7 @@ The result is a seamless experience where:
 
 - First visit respects system preference
 - Manual toggle persists across sessions
-- Code blocks switch between `github-light` and `github-dark` themes
+- Code blocks switch between `github-light` and `vitesse-dark` themes
 
 ## Long-form Prose
 

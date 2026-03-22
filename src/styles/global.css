@@ -82,6 +82,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -170,26 +171,28 @@ main {
 }
 
 /* --- Code block theme switching --- */
-/* Default: dark. Activate Shiki dark colors. */
-.astro-code,
-.astro-code span {
+/*
+ * Shiki dual-theme: light values are inline styles, dark values use --shiki-dark.
+ * Dark mode: override inline colors with --shiki-dark custom properties.
+ * Light mode: let inline styles show through (they ARE the light values).
+ */
+:root:not([data-theme='light']) .astro-code,
+:root:not([data-theme='light']) .astro-code span {
   color: var(--shiki-dark) !important;
   background-color: transparent !important;
 }
 
-.astro-code {
+:root:not([data-theme='light']) .astro-code {
   background-color: var(--color-code-bg) !important;
 }
 
-/* Light mode: use Shiki light colors (fall back to inline style values) */
-[data-theme='light'] .astro-code,
-[data-theme='light'] .astro-code span {
-  color: var(--shiki-light) !important;
-  background-color: transparent !important;
-}
-
+/* Light mode: only override bg to match our theme. Inline styles handle text colors. */
 [data-theme='light'] .astro-code {
   background-color: var(--color-code-bg) !important;
+}
+
+[data-theme='light'] .astro-code span {
+  background-color: transparent !important;
 }
 
 /* --- Prose --- */
@@ -301,20 +304,23 @@ main {
   box-shadow: none;
 }
 
-/* Language label on code blocks */
+/* Language label on code blocks — sticky so it doesn't scroll away */
 .prose pre::before {
   content: attr(data-language);
-  position: absolute;
+  position: sticky;
+  float: right;
   top: 0;
   right: 0;
-  padding: 0.2em 0.6em;
-  font-size: 0.7rem;
+  padding: 0.15em 0.5em;
+  margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) 0 0;
+  font-size: 0.65rem;
   color: var(--color-text-muted);
   background: var(--color-bg-elevated);
   border-bottom-left-radius: var(--radius-sm);
   border-top-right-radius: calc(var(--radius-md) - 1px);
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  pointer-events: none;
 }
 
 .prose hr {
@@ -362,6 +368,45 @@ main {
 .prose img {
   border-radius: var(--radius-md);
   margin: 2em auto;
+}
+
+/* Broken image fallback */
+.prose img[alt]::after {
+  content: attr(alt);
+  display: block;
+  padding: var(--space-4);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* --- Mermaid diagrams --- */
+pre.mermaid {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--space-5) !important;
+  min-height: 120px !important;
+}
+
+pre.mermaid:not([data-processed]) {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 25%,
+    var(--color-bg-hover) 50%,
+    var(--color-bg-elevated) 75%
+  ) !important;
+  background-size: 200% 100% !important;
+}
+
+pre.mermaid[data-processed] {
+  background: var(--color-bg-elevated) !important;
+  min-height: auto !important;
+}
+
+pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
 }
 
 /* --- Tags --- */
