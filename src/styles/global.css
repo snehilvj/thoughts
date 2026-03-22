@@ -45,7 +45,7 @@
 
   --content-width: 760px;
   --content-wide: 960px;
-  --header-height: 48px;
+  --header-height: auto;
 
   --radius-sm: 6px;
   --radius-md: 10px;
