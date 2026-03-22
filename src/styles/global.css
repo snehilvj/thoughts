@@ -1,5 +1,5 @@
 /* ============================================
-   thoughts — Design System
+   thoughts  - Design System
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
@@ -15,7 +15,7 @@
 
 /* --- Design Tokens --- */
 :root {
-  /* Warm amber accent — distinctive, contemplative */
+  /* Warm amber accent  - distinctive, contemplative */
   --color-bg: #161616;
   --color-bg-elevated: #1e1e1e;
   --color-bg-hover: #242424;
@@ -92,6 +92,7 @@ body {
   background-color: var(--color-bg);
   background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
   background-size: 24px 24px;
+  background-attachment: fixed;
   line-height: 1.75;
   letter-spacing: 0.01em;
   transition: color var(--transition-base), background-color var(--transition-base);
@@ -307,7 +308,7 @@ main {
   box-shadow: none;
 }
 
-/* Language label on code blocks — sticky so it doesn't scroll away */
+/* Language label on code blocks  - sticky so it doesn't scroll away */
 .prose pre::before {
   content: attr(data-language);
   position: sticky;

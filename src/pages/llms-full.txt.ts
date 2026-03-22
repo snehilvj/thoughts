@@ -5,7 +5,7 @@ export async function GET() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  let content = `# ${SITE.title} — Full Content Index\n\n`;
+  let content = `# ${SITE.title}  - Full Content Index\n\n`;
   content += `> ${SITE.description}\n\n`;
   content += `Author: ${SITE.author}\n`;
   content += `URL: ${SITE.url}\n\n`;

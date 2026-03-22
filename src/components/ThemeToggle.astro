@@ -9,7 +9,7 @@
 
   function updateLabel() {
     const theme = document.documentElement.dataset.theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (label) label.textContent = theme;
+    if (label) label.textContent = theme === 'dark' ? 'light' : 'dark';
   }
 
   updateLabel();

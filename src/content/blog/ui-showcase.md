@@ -6,7 +6,7 @@ tags: ["tech", "meta", "webdev"]
 draft: false
 ---
 
-This post exists to showcase every visual element the blog supports. Think of it as a living style guide — if something looks off here, it needs fixing.
+This post exists to showcase every visual element the blog supports. Think of it as a living style guide  - if something looks off here, it needs fixing.
 
 ## Headings
 
@@ -22,7 +22,7 @@ For fine-grained organization. Rarely needed, but available.
 
 ## Text Formatting
 
-Regular paragraph text is set in JetBrains Mono at 15px with generous line-height. The monospace aesthetic means every character takes the same space — readable but with character.
+Regular paragraph text is set in JetBrains Mono at 15px with generous line-height. The monospace aesthetic means every character takes the same space  - readable but with character.
 
 Here's **bold text** for emphasis, *italic text* for tone, and ***bold italic*** when you really mean it. You can also use `inline code` for technical terms like `useState` or `docker-compose.yml`.
 
@@ -42,7 +42,7 @@ Blockquotes get a warm amber accent border, an elevated background with rounded 
 
 ### Unordered lists
 
-- First item — the basics
+- First item  - the basics
 - Second item with some **bold** and `code`
 - Third item that's a bit longer to show how line wrapping looks when the content extends beyond a single line in the layout
 - Nested items work too:
@@ -239,7 +239,7 @@ Images are displayed inline with subtle rounded corners, matching the elevated s
 
 ## Combining Elements
 
-Here's a realistic scenario combining multiple elements — a technical explanation:
+Here's a realistic scenario combining multiple elements  - a technical explanation:
 
 The blog's theme system works in three layers:
 
@@ -254,7 +254,7 @@ const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches
 document.documentElement.dataset.theme = stored || preferred;
 ```
 
-> This two-layer approach ensures zero flash of wrong theme and smooth transitions — all without a framework.
+> This two-layer approach ensures zero flash of wrong theme and smooth transitions  - all without a framework.
 
 The result is a seamless experience where:
 
@@ -264,9 +264,9 @@ The result is a seamless experience where:
 
 ## Long-form Prose
 
-This paragraph is intentionally longer to demonstrate how the blog handles extended prose. Monospace text at 15px with generous line-height and a 680px max-width creates a comfortable reading measure. Every character takes the same space — which gives prose a distinctive rhythm. It's not how most blogs look, and that's the point.
+This paragraph is intentionally longer to demonstrate how the blog handles extended prose. Monospace text at 15px with generous line-height and a 680px max-width creates a comfortable reading measure. Every character takes the same space  - which gives prose a distinctive rhythm. It's not how most blogs look, and that's the point.
 
-Good typography isn't about picking fancy fonts. It's about invisible decisions — line-height, letter-spacing, font-size ratios, measure width — that make reading feel effortless. Even in monospace, the right spacing makes long-form content feel natural.
+Good typography isn't about picking fancy fonts. It's about invisible decisions  - line-height, letter-spacing, font-size ratios, measure width  - that make reading feel effortless. Even in monospace, the right spacing makes long-form content feel natural.
 
 ---
 
