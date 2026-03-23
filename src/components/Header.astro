@@ -12,8 +12,7 @@ const pathname = Astro.url.pathname;
 
     <div class="header__right">
       <a href={`${base}blog`} class:list={['header__link', { active: pathname.startsWith(`${base}blog`) }]}>blog</a>
-      <a href={`${base}garden`} class:list={['header__link', { active: pathname.startsWith(`${base}garden`) }]}>garden</a>
-      <a href={`${base}about`} class:list={['header__link', { active: pathname.startsWith(`${base}about`) }]}>about</a>
+<a href={`${base}about`} class:list={['header__link', { active: pathname.startsWith(`${base}about`) }]}>about</a>
       <ThemeToggle />
     </div>
   </nav>
